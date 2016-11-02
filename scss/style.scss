@@ -1,0 +1,197 @@
+html,
+body {
+    position: relative;
+    height: 100%;
+    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+}
+
+body {
+    background: #222;
+    &:before {
+        content: 'Loading...';
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+    }
+    &.data-loaded {
+        background: #fff;
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.gradients {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div[class^="canvas"] {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all ease 300ms;
+    &.active {
+        opacity: 1;
+    }
+}
+
+.title-block {
+    position: relative;
+    display: inline;
+    opacity: 0;
+    transition: all ease 300ms;
+    a:not(#title) {
+        display: block;
+        position: absolute;
+        width: 33px;
+        height: 20px;
+        transition: all ease 300ms;
+        &:before,
+        &:after {
+            content: '';
+            width: 20px;
+            height: 4px;
+            background: rgba(255, 255, 255, 1);
+            position: absolute;
+            top: 8px;
+            left: 0;
+            transition: all ease 300ms;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+        }
+        &:before {
+            transform: rotate(45deg);
+            left: 11px;
+        }
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
+    .up {
+        top: -3em;
+        left: calc(50% - 20px);
+        &.move {
+            top: -4em;
+        }
+    }
+    .down {
+        bottom: -3em;
+        left: calc(50% - 20px);
+        transform: rotate(-180deg);
+        &.move {
+            bottom: -4em;
+        }
+    }
+    .right {
+        top: calc( 50% - 11px);
+        right: -3em;
+        transform: rotate(-270deg);
+        &.move {
+            right: -4em;
+        }
+    }
+    .left {
+        top: calc( 50% - 11px);
+        left: -3em;
+        transform: rotate(-90deg);
+        &.move {
+            left: -4em;
+        }
+    }
+    &:hover {
+        #title {
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+    &.active {
+        opacity: 1;
+    }
+}
+
+#title {
+    text-decoration: none;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all ease 350ms;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4), 1px 5px 8px rgba(0, 0, 0, 0.3), 1px 10px 12px rgba(0, 0, 0, 0.1);
+    &.active {
+        opacity: 1;
+    }
+    &:hover {
+        letter-spacing: 5px;
+    }
+}
+
+.colours {
+    width: calc(100% - 4em);
+    padding: 0 2em;
+    position: fixed;
+    bottom: 2em;
+    z-index: 1;
+    span {
+        font-size: 0.75em;
+        color: #fff;
+        letter-spacing: 1px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+        text-transform: uppercase;
+        padding: 1em;
+        background: rgba(255, 255, 255, 0);
+        border-radius: 10px;
+        transition: all ease 300ms;
+        &:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: #000;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0);
+        }
+    }
+    #colour-1 {
+        float: left;
+    }
+    #colour-2 {
+        float: right;
+    }
+}
+
+.hint-container {
+    position: fixed;
+    bottom: 10vh;
+    width: 100%;
+    text-align: center;
+    transition: all linear 500ms;
+    opacity: 0;
+    .hint {
+        display: inline-block;
+        border-radius: 8px;
+        padding: 0.5em 0.75em;
+        background: rgba(33, 33, 33, .5);
+        color: #fff;
+    }
+    &.used {
+        opacity: 0;
+    }
+}
+
+.title-block.active+.hint-container:not(.used) {
+    opacity: 1;
+}
