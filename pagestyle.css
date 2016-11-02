@@ -1,0 +1,206 @@
+/* Copyright (c) 2016 Micael Levi L. C. */
+/*
+Copyright (c) 2015 Michael Rieppel
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
+
+/*@import url(https://fonts.googleapis.com/css?family=Megrim);*/
+@import url(https://fonts.googleapis.com/css?family=Lobster+Two:700); /* [v2.2]8 */
+
+/* [v2.2]7
+@font-face {
+  font-family: 'audimatRegular';
+  font-style:   normal;
+  font-weight:  normal;
+  src: local('audimat regular'), url('fonts/audimat-regular.woff') format('woff');
+}*/
+@font-face {
+  font-family: 'Fipps';
+  font-style:   normal;
+  font-weight:  normal;
+  src: local('Fipps'), url('fonts/FIPPS.woff') format('woff');
+}
+
+body {
+  font-family: "Open Sans", Verdana, Helvetica, sans-serif;
+  color:#444444;
+  height:100%;
+}
+
+a:link {color:#4B2EDE;text-decoration:none;}      /* link não visitado */
+a:visited {color:#4B2EDE;text-decoration:none;}   /* link visitado */
+a:hover {color:#9D90DC;text-decoration:none;}     /* cursor sobre o link */
+a:active {color:#FFA04D;text-decoration:none;}    /* link selecionado */
+
+#container {
+  width:800px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:13px;
+}
+
+#location {
+  color:#999999;
+  font-size:12px;
+  position:absolute;
+  top:5px;
+  left:5px;
+}
+
+#location a {
+  color: rgba(153, 153, 153, 0.6);
+}
+
+#githublink {
+  height: 50px;
+  width: 50px;
+  /*height: 100px;
+  width: 200px;*/
+}
+
+#githublink img {
+  /*position:absolute;*/
+  position: fixed;
+  right: 5px;
+  top:5px;
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+#title {
+  text-align:center;
+  font-size:25px;
+  margin-top:15px;
+  margin-bottom:40px; /* [v2.2]6 */
+  font-family: "Lobster Two", "Lucida Console";
+}
+
+#validade_argumento{
+  font-size: 100%;
+  font-family: Fipps, "Lucida Console";
+  text-decoration: blink;
+  visibility: hidden; /* [v2.2]2 */
+}
+
+table.symbols {
+  border:0;
+  border-collapse: collapse;
+  /*cursor: none; /* [v2.2]3 */*/
+}
+
+table.symbols th {
+  text-align: left;
+  font-weight:bold;
+  border:1px solid black;
+  padding:.2em;
+}
+
+table.symbols td {
+  text-align: left;
+  border:1px solid black;
+  padding:.2em;
+}
+
+table.symbols td:last-child { text-align:center; }
+
+td.space { width:1em; }
+
+#tt div.center {
+  margin: 0 auto;
+  display: table;
+}
+
+table.truth {
+  border-collapse:collapse;
+  margin:0 auto;
+}
+
+table.truth th {
+  border-bottom:1px solid black;
+  text-align: center;
+  padding:.2em;
+  font-weight: bold;
+}
+
+table.truth td { text-align: center; }
+
+table.truth tr:nth-child(even){ background-color: #f2f2f2; }
+
+table.truth .dv { border-right:1px solid black; }
+
+.linhaCriticaIdentificador{
+  color: rgba(88, 47, 101, 0.95);
+  background-color: white;
+  width: 20px;
+  visibility: hidden; /* [v2.2]1 */
+}
+
+.numeroLinha{
+  color: black;
+  opacity: 0.3;
+  filter: Alpha(opacity=30); /* IE8 and earlier */
+  visibility: hidden;
+} /* [tsk04] */
+
+p{
+  text-align: center;
+  display: block;
+  margin-top: 0px;
+  font-weight: bold;
+  font-size: 16px;
+}
+p.argumentoInvalido{ color: rgb(204, 51, 51); }
+p.argumentoValido{ color: rgb(48, 80, 48); }
+
+/*.check-with-label:checked + .label-for-check { color: rgba(88,47,101,0.95); } */
+
+::-webkit-input-placeholder { text-align: center; } /* [v2.2]5 */
+input:-moz-placeholder { text-align: center; }      /* [v2.2]5 */
+
+input[type="button"]{ cursor: pointer; } /* [v2.2]3 */
+
+/* botão gerado com http://www.bestcssbuttongenerator.com/     [v2.2]4 */
+.mainButton {
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+  background-color:#f9f9f9;
+	border:1px solid #777373;
+	display:inline-block;
+	cursor:pointer;
+	color:#5A5A5A;
+	font-family:Verdana;
+	font-size:11px;
+	font-weight:bold;;
+	padding:3px 8px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.mainButton:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
+	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
+	background-color:#e9e9e9;
+}
+.mainButton:active {
+	position:relative;
+	top:1px;
+}
