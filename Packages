@@ -89,3 +89,18 @@ Author: julioverne <julioverne@me.com>
 Homepage: http://twitter.com/ijulioverne
 Icon: file:///Library/PreferenceBundles/WidPlayer.bundle/icon@2x.png
 
+
+Package: com.julioverne.ntspeed
+Section: Tweaks
+Maintainer: Julio
+Architecture: iphoneos-arm
+Version: 0.1
+Depends: mobilesubstrate, preferenceloader, firmware (>= 7.0)
+Filename: ./com.julioverne.ntspeed_0.1_iphoneos-arm.deb
+Size: 21720
+MD5sum: 5c3e3887ab1375da04d9a99c5c781c14
+Description: See active traffic network speed
+Name: NtSpeed 
+Author: julioverne <julioverne@me.com>
+Homepage: http://twitter.com/ijulioverne
+Icon: file:///Library/PreferenceBundles/WidPlayer.bundle/icon@2x.png
