@@ -1,19 +1,27 @@
 <?php
 /*
-https://api.telegram.org/bot328107801:AAGlUIukOJqJy4P_iPA-HiPnkVJ8awPH4lM/getupdates
-https://api.telegram.org/bot328107801:AAGlUIukOJqJy4P_iPA-HiPnkVJ8awPH4lM/getme
-https://api.telegram.org/bot328107801:AAGlUIukOJqJy4P_iPA-HiPnkVJ8awPH4lM/sendmessage?chat_id=170449962&text=<>
+https://core.telegram.org/bots/samples
+
+https://api.telegram.org/bot300190289:AAGugr5fVFfh6pdcA1KvESc1UPvQtzoj5z0/getupdates
+https://api.telegram.org/bot300190289:AAGugr5fVFfh6pdcA1KvESc1UPvQtzoj5z0/getme
+https://api.telegram.org/bot300190289:AAGugr5fVFfh6pdcA1KvESc1UPvQtzoj5z0/sendmessage?chat_id=170449962&text=<>
 */
 
-
-$botToken = "328107801:AAGlUIukOJqJy4P_iPA-HiPnkVJ8awPH4lM";
+// (c) https://www.youtube.com/watch?v=hJBYojK7DO4
+$botToken = "300190289:AAGugr5fVFfh6pdcA1KvESc1UPvQtzoj5z0";
 $website = "https://api.telegram.org/bot".$botToken;
 
 
-$update = file_get_contents($website."/getupdates");
+$update = file_get_contents("php://input");
 $updateArray = json_decode($update, TRUE);
-print_r($updateArray);
-/*
+
+$cahtId = $updateArray["result"][0]["message"]["chat"]["id"];
+
+file_get_contents($website."/sendmessage?chat_id=".cahtId."&text=test");
+
+
+
+/******** PARA ADICIONAR AÇÕES AOS COMANDOS DO BOT
 $update = file_get_contents('php://input');
 $update = json_decode($update, TRUE);
 
@@ -32,7 +40,7 @@ function sendMessage ($chatId, $message) {
 	$url = $GLOBALS[website]."/sendMessage?chat_id=".$chatId."&text=".urlencode($message);
 	file_get_contents($url);
 }
-*/
+***********/
 
 
 
