@@ -2,31 +2,33 @@
 	<head>
       <link rel="shortcut icon" type="image/png" href="favicon.png"/>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>:: Micalevisk ::</title>
-      <!-- base href="http://repo.laughingquoll.net/" -->
+      <title>Micalevisk++</title>
       <link rel="stylesheet" type="text/css" href="newstyle.css">
    </head>
    <body>
       <panel id="app">
+
          <fieldset style="clear:both" id="description">
             <label>{{ title }}</label>
             <div>
               <p style="font-size:small;">
-                Copyright (c) 2017 Micael Levi<br>
-                Heeeeeyy, byyeeeee<br>
+                {{ message.title }}<br>
+                {{ message.body  }}<br>
               </p>
               <ol v-if="my_repos.length > 0">
                 <li v-for="(my_repo, index) in my_repos">
-                     <a v-bind:href="my_repo.html_url" target="_blank">{{ my_repo.name }}</a><br> 
+                     <a v-bind:href="my_repo.html_url" target="_blank">{{ my_repo.name }}</a><br>
                     <span class="repo-description" v-bin:id="my_repo.name">{{ parserDescription( my_repo.description ) }}</span><br>
                     <br>
                 </li>
               </ol>
-              <span v-else><b>loading...</b></span>
-
+              <span v-else>
+                <b>loading...</b>
+              </span>
             </div>
+
       </panel>
-  
+
       <!-- Vue.js -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
       <!-- Vue.js plugin: Resource, gives ajax functionality -->

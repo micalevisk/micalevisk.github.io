@@ -46,6 +46,10 @@ new Vue({
       data:
       {
         title: "Micael's Public Repository",
+        message: {
+          title: 'Copyright (c) 2017 Micael Levi',
+          body: 'Heeeeeyy, byyeeeee'
+        }
         my_repos: [],
         starred_repos: [],
         emojis: {}
@@ -75,7 +79,7 @@ new Vue({
             .then(response => {
               this.my_repos = response.data.map(onlyUsefullInfos);
             }, errorCallback);
-          
+
           /*
           githubUserResource(this.$resource)
             .get_user_stars()
