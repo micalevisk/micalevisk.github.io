@@ -49,7 +49,7 @@ new Vue({
         message: {
           title: 'Copyright (c) 2017 Micael Levi',
           body: 'Heeeeeyy, byyeeeee'
-        }
+        },
         my_repos: [],
         starred_repos: [],
         emojis: {}
