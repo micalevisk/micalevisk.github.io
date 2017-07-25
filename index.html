@@ -1,52 +1,39 @@
 <html>
 	<head>
+      <link rel="shortcut icon" type="image/png" href="favicon.png"/>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Micael Public Repo</title>
+      <title>:: Micalevisk ::</title>
       <!-- base href="http://repo.laughingquoll.net/" -->
       <link rel="stylesheet" type="text/css" href="newstyle.css">
    </head>
    <body>
-      <panel>
-         <fieldset>
-            <a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://micalevisk.github.io/" target="_blank" class="">
-               <p>
-                  Add Repo To iDevice
-               </p>
-            </a>
-         </fieldset>
-      </panel>
-      <panel>
+      <panel id="app">
          <fieldset style="clear:both" id="description">
-            <label>Micael's Public Repository</label>
+            <label>{{ title }}</label>
             <div>
-               <p style="font-size:small;">
-									Copyright (c) 2014 Julio Verne.<br>
-                  This is my public jailbreak repository where I keep all my projects that I have open for download.<br><br>
-                  <b>Projects:</b>
-               </p>
-							 <a href="https://github.com/julioverne/gravity"><li>gravity</li></a>
-               <li>kbmover</li>
-               <a href="https://github.com/julioverne/MiBandAlert"><li>MiBandAlert</li></a>
-               <a href="https://github.com/julioverne/MImport"><li>MImport</li></a>
-               <a href="https://github.com/julioverne/ncgroup"><li>ncgroup</li></a>
-               <a href="https://github.com/julioverne/widplayer"><li>widplayer</li></a>
-               <a href="https://github.com/julioverne/ntspeed"><li>NtSpeed</li></a>
+              <p style="font-size:small;">
+                Copyright (c) 2017 Micael Levi<br>
+                Heeeeeyy, byyeeeee<br>
+              </p>
+              <ol v-if="my_repos.length > 0">
+                <li v-for="(my_repo, index) in my_repos">
+                     <a v-bind:href="my_repo.html_url" target="_blank">{{ my_repo.name }}</a><br> 
+                    <!-- <a href="" target="_blank">{{ my_repo.name }}</a><br> -->
+                    <span class="repo-description" :id="my_repo.name">{{ parserDescription(my_repo.description) }}</span><br>
+                    <br>
+                </li>
+              </ol>
+              <span v-else><b>loading...</b></span>
+
             </div>
-         </fieldset>
       </panel>
-      <panel>
-         <fieldset>
-            <a href="https://twitter.com/ijulioverne" target="_blank" class="">
-               <p>Twitter</p>
-            </a>
-            <a href="http://github.com/micalevisk" target="_blank" class="">
-               <p>Website</p>
-            </a>
-            <a href="https://github.com/julioverne" target="_blank" class="">
-               <p>Github</p>
-            </a>
-         </fieldset>
-      </panel>
-   
+  
+      <!-- Vue.js -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+      <!-- Vue.js plugin: Resource, gives ajax functionality -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.min.js"></script>
+      <!-- our app code -->
+      <script src="main.js"></script>
+
 	</body>
 </html>

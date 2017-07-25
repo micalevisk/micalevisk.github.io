@@ -1,5 +1,3 @@
-@import 'resetstyle.css';
-
 .ios9-lightblue {color:#54C7FC;}
 .ios9-blue {color:#0076FF;}
 .ios9-darkpink {color:#FF2851;}
@@ -16,14 +14,12 @@ margin-top:0px !important; padding-top:9px !important; -moz-box-shadow: inset 0 
 body {
 	-webkit-text-size-adjust:none;
 	-webkit-touch-callout:none;
-	-webkit-user-select:text;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	margin: 9px auto;
 	width: device-width;
 	max-width: 414px !important;
 	font-family: ".SFNSText-Medium", -apple-system, "Courier New", "Lucida Grande", sans-serif;
 	background-color: #efeff4;
-	min-font-size: 13px;
 	font-size: 13px;
 	text-align:center;
 }
@@ -86,6 +82,10 @@ body > panel > fieldset.warn {
 body > panel > fieldset.okay {
 	color: white;
 	background-color: MediumSeaGreen;
+}
+
+label {
+	font-weight: bolder;
 }
 
 body > panel > fieldset > label {
@@ -177,8 +177,12 @@ body > panel > fieldset > div img {
 	margin:5px 2px
 }
 
-body > panel > fieldset > div * {
+/* body > panel > fieldset > div * {
 	font-size: inherit !important;
+} */
+
+.repo-description {
+	font-size: 12px;
 }
 
 body > panel > fieldset > div > table.information {
