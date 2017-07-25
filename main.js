@@ -49,11 +49,10 @@ const app = new Vue({
     title: "Micalevisk's Public Repositories",
     message: {
       title: 'Copyright (c) 2017 Micael Levi',
-      body: 'Heeeeeyy, byyeeeee'
+      body: 'Heeeeeyy, byyeeeee',
+      loading: 'loading...'
     },
-    my_repos: [],
-    starred_repos: [],
-    emojis: {}
+    my_repos: []
   },
 
   created: function() {
@@ -72,6 +71,7 @@ const app = new Vue({
       };
 
       const githubUserResource = (resource) => resource(githubIssues.getUser(), githubIssues.getOAuth(), githubActions);
+      
       const errorCallback = (error) => console.error(error);
       const onlyUsefullInfos = ({ name, html_url, description, language }) => ({ name, html_url, description, language });
 
@@ -81,23 +81,9 @@ const app = new Vue({
           this.my_repos = response.data.map(onlyUsefullInfos);
         }, errorCallback);
 
-      /*
-      githubUserResource(this.$resource)
-        .get_user_stars()
-        .then(response => {
-          this.starred_repos = response.data.map(onlyUsefullInfos);
-        }, errorCallback);
-
-      githubUserResource(this.$resource)
-        .get_emojis()
-        .then(response => {
-          this.emojis = response.data;
-        }, errorCallback);
-      */
     },
 
     parserDescription(description){
-      // const htmlTemplate = '<img src=":link" alt=":emoji" style="height: 10px; width: 10px">';
       let descriptionParsed = description || '';
       descriptionParsed = descriptionParsed.replace(/\s?:\w+:\s?/g, '');
       return descriptionParsed;
