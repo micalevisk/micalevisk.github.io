@@ -10,6 +10,7 @@ function replacer(str, data) {
 
 // const takeProps = (props) => (obj) => props.reduce((acc, prop) => Object.assign(acc, {[prop]: obj[prop]}), {});
 
+// ---- private ---- //
 const githubIssues = {
   username: 'micalevisk',
 
@@ -39,68 +40,68 @@ const githubIssues = {
   }
 };
 
-const app =
-new Vue({
-      el: '#app',
 
-      data:
-      {
-        title: "Micael's Public Repository",
-        message: {
-          title: 'Copyright (c) 2017 Micael Levi',
-          body: 'Heeeeeyy, byyeeeee'
-        },
-        my_repos: [],
-        starred_repos: [],
-        emojis: {}
-      },
+const app = new Vue({
+  el: '#app',
 
-      created(){
-        this.fetchData();
-      },
+  data:
+  {
+    title: "Micalevisk's Public Repositories",
+    message: {
+      title: 'Copyright (c) 2017 Micael Levi',
+      body: 'Heeeeeyy, byyeeeee'
+    },
+    my_repos: [],
+    starred_repos: [],
+    emojis: {}
+  },
 
-      methods:
-      {
+  created: function() {
+    this.fetchData();
+  },
 
-        fetchData(){
+  methods:
+  {
 
-          const githubActions = {
-            get_user_repos: { method: 'GET', url: githubIssues.getUserRepos() },
-            get_user_stars: { method: 'GET', url: githubIssues.getUserStars() },
-            get_emojis:     { method: 'GET', url: githubIssues.getEmojis()    }
-          };
+    fetchData(){
 
-          const githubUserResource = (resource) => resource(githubIssues.getUser(), githubIssues.getOAuth(), githubActions);
-          const errorCallback = (error) => console.error(error);
-          const onlyUsefullInfos = ({ name, html_url, description, language }) => ({ name, html_url, description, language });
+      const githubActions = {
+        get_user_repos: { method: 'GET', url: githubIssues.getUserRepos() },
+        get_user_stars: { method: 'GET', url: githubIssues.getUserStars() },
+        get_emojis:     { method: 'GET', url: githubIssues.getEmojis()    }
+      };
 
-          githubUserResource(this.$resource)
-            .get_user_repos()
-            .then(response => {
-              this.my_repos = response.data.map(onlyUsefullInfos);
-            }, errorCallback);
+      const githubUserResource = (resource) => resource(githubIssues.getUser(), githubIssues.getOAuth(), githubActions);
+      const errorCallback = (error) => console.error(error);
+      const onlyUsefullInfos = ({ name, html_url, description, language }) => ({ name, html_url, description, language });
 
-          /*
-          githubUserResource(this.$resource)
-            .get_user_stars()
-            .then(response => {
-              this.starred_repos = response.data.map(onlyUsefullInfos);
-            }, errorCallback);
+      githubUserResource(this.$resource)
+        .get_user_repos()
+        .then(response => {
+          this.my_repos = response.data.map(onlyUsefullInfos);
+        }, errorCallback);
 
-          githubUserResource(this.$resource)
-            .get_emojis()
-            .then(response => {
-              this.emojis = response.data;
-            }, errorCallback);
-          */
-        },
+      /*
+      githubUserResource(this.$resource)
+        .get_user_stars()
+        .then(response => {
+          this.starred_repos = response.data.map(onlyUsefullInfos);
+        }, errorCallback);
 
-        parserDescription(description){
-          // const htmlTemplate = '<img src=":link" alt=":emoji" style="height: 10px; width: 10px">';
-          let descriptionParsed = description || '';
-          descriptionParsed = descriptionParsed.replace(/\s?:\w+:\s?/g, '');
-          return descriptionParsed;
-        }
+      githubUserResource(this.$resource)
+        .get_emojis()
+        .then(response => {
+          this.emojis = response.data;
+        }, errorCallback);
+      */
+    },
 
-      }
+    parserDescription(description){
+      // const htmlTemplate = '<img src=":link" alt=":emoji" style="height: 10px; width: 10px">';
+      let descriptionParsed = description || '';
+      descriptionParsed = descriptionParsed.replace(/\s?:\w+:\s?/g, '');
+      return descriptionParsed;
+    }
+
+  }
 });

@@ -16,7 +16,7 @@
                 {{ message.body  }}<br>
               </p>
               <ol v-if="my_repos.length > 0">
-                <li v-for="(my_repo, index) in my_repos">
+                <li v-for="my_repo in my_repos">
                      <a v-bind:href="my_repo.html_url" target="_blank">{{ my_repo.name }}</a><br>
                     <span class="repo-description" v-bin:id="my_repo.name">{{ parserDescription( my_repo.description ) }}</span><br>
                     <br>
