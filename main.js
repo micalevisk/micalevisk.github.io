@@ -23,20 +23,21 @@ const githubIssues = {
   user_repos_path: '/repos',
   user_starred_path: '/starred',
 
-  getEmojis(){
-    return this.url_api + this.emoji_path;
+  getOAuth(){
+    return { 'client_id': this.client_id, 'client_secret': this.client_secret };
   },
   getUser(){
     return this.url_api + replacer(this.user_endpoint, { username: this.username });
   },
+
+  getEmojis(){
+    return { method: 'GET', url: this.url_api + this.emoji_path };
+  },
   getUserRepos(){
-    return this.getUser() + this.user_repos_path;
+    return { method: 'GET', url: this.getUser() + this.user_repos_path };
   },
   getUserStars(){
-    return this.getUser() + this.user_starred_path;
-  },
-  getOAuth(){
-    return { 'client_id': this.client_id, 'client_secret': this.client_secret };
+    return { method: 'GET', url: this.getUser() + this.user_starred_path };
   }
 };
 
@@ -63,24 +64,33 @@ const app = new Vue({
   {
 
     fetchData(){
-
       const githubActions = {
-        get_user_repos: { method: 'GET', url: githubIssues.getUserRepos() },
-        get_user_stars: { method: 'GET', url: githubIssues.getUserStars() },
-        get_emojis:     { method: 'GET', url: githubIssues.getEmojis()    }
+        get_user_repos: githubIssues.getUserRepos(),
+        get_user_stars: githubIssues.getUserStars(),
+        get_emojis:     githubIssues.getEmojis()
       };
 
       const githubUserResource = (resource) => resource(githubIssues.getUser(), githubIssues.getOAuth(), githubActions);
       
       const errorCallback = (error) => console.error(error);
-      const onlyUsefullInfos = ({ name, html_url, description, language }) => ({ name, html_url, description, language });
+      const onlyUsefullInfos = ((githubData) => {
+        return {
+          name: githubData.name,
+          html_url: githubData.html_url,
+          description: githubData.description,
+          language: githubData.language,
+          homepage: githubData.homepage,
+          gith_url: githubData.gith_url,
+          created_at: githubData.created_at,
+          updated_at: githubData.updated_at
+        };
+      });
 
       githubUserResource(this.$resource)
         .get_user_repos()
         .then(response => {
           this.my_repos = response.data.map(onlyUsefullInfos);
         }, errorCallback);
-
     },
 
     parserDescription(description){
