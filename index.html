@@ -16,9 +16,9 @@
                 {{ message.body  }}<br>
               </p>
               <ol v-if="my_repos.length > 0">
-                <li v-for="my_repo in my_repos">
-                     <a v-bind:href="my_repo.html_url" target="_blank">{{ my_repo.name }}</a><br>
-                    <span class="repo-description" v-bin:id="my_repo.name">{{ parserDescription( my_repo.description ) }}</span><br>
+                <li v-for="my_repo in my_repos" :id="'repo_' + my_repo.name.toLowerCase()" :language="my_repo.language.toLowerCase()" :create-date="my_repo.created_at">
+                    <a :href="my_repo.html_url" :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()" target="_blank">{{ my_repo.name }}</a><br>
+                    <span class="repo-description">{{ parserDescription( my_repo.description ) }}</span><br>
                     <br>
                 </li>
               </ol>
