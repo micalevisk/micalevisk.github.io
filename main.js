@@ -49,9 +49,13 @@ const app = new Vue({
   {
     title: "Micalevisk's Public Repositories",
     message: {
-      title: 'Copyright (c) 2017 Micael Levi',
+      title: 'Copyright (c) 2017',
       body: 'Heeeeeyy, byyeeeee',
-      loading: 'loading...'
+      loading: 'loading...',
+      author: {
+        name: 'Micael Levi',
+        repo: 'https://github.com/micalevisk'
+      }
     },
     my_repos: []
   },
@@ -71,7 +75,7 @@ const app = new Vue({
       };
 
       const githubUserResource = (resource) => resource(githubIssues.getUser(), githubIssues.getOAuth(), githubActions);
-      
+
       const errorCallback = (error) => console.error(error);
       const onlyUsefullInfos = ((githubData) => {
         return {

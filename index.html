@@ -12,8 +12,8 @@
             <label>{{ title }}</label>
             <div>
               <p style="font-size:small;">
-                {{ message.title }}<br>
-                {{ message.body  }}<br>
+                {{ message.title }}&nbsp;<a :href="message.author.repo" target="_blank"><b>{{ message.author.name }}</b></a><br>
+                {{ message.body  }}
               </p>
               <ol v-if="my_repos.length > 0">
                 <li v-for="my_repo in my_repos" :id="'repo_' + my_repo.name.toLowerCase()" :language="my_repo.language.toLowerCase()" :create-date="my_repo.created_at">
