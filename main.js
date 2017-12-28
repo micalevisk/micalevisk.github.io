@@ -1,5 +1,7 @@
 const gitHubAPI = {
   url_api: 'https://api.github.com',
+  token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0', // §private§
+
   endpoints: {
     root: 'https://api.github.com',
     categories: { // endpoint categories
