@@ -8,10 +8,10 @@
    <body>
       <panel id="app">
 
-         <fieldset style="clear:both" id="description">
+         <fieldset id="description">
             <label>{{ title }}</label>
             <div>
-              <p style="font-size:small;">
+              <p>
                 {{ message.title }}&nbsp;<a :href="message.author.repo" target="_blank" title="github profile"><u>{{ message.author.name }}</u></a><br>
                 {{ message.body  }}
               </p>
