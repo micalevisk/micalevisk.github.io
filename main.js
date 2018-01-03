@@ -1,5 +1,4 @@
 const gitHubAPI = {
-  token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0', //§ private
   endpoints: {
     root: 'https://api.github.com',
     categories: { // endpoint categories
@@ -11,9 +10,6 @@ const gitHubAPI = {
   HTTP_options() {
     return {
       baseURL: this.endpoints.root,
-      headers: {
-        Authorization: 'Bearer ' + this.token,
-      }
     }
   },
 
@@ -46,7 +42,6 @@ const app = new Vue({
   },
 
   created: function() {
-    // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token'); // Axios add Authorization headers for default (vide https://github.com/feathersjs/authentication/issues/135)
     this.fetchData();
   },
 
@@ -70,7 +65,6 @@ const app = new Vue({
       });
 
       axios.create( gitHubAPI.HTTP_options() ).get( gitHubAPI.user_path(this.username) )
-        .then(response => { console.log(response.data.length); return response }) //§ verificar se os 30 foram retornados
         .then(response => this.my_repos = response.data.map(onlyUsefulData))
         .catch(errorCallback)
     },
