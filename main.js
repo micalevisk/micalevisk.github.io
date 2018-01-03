@@ -1,20 +1,28 @@
 const gitHubAPI = {
-  url_api: 'https://api.github.com',
-  token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0', // §private§
-
+  token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0', //§ private
   endpoints: {
     root: 'https://api.github.com',
     categories: { // endpoint categories
       emojis: '/emojis',
-      user: '/users/{user}/repos',
+      user: '/users/:user/repos',
     }
   },
 
-  emojis_url() {
-    return this.endpoints.root + this.endpoints.categories.emojis;
+  HTTP_options() {
+    return {
+      baseURL: this.endpoints.root,
+      headers: {
+        Authorization: 'Bearer ' + this.token,
+      }
+    }
   },
-  user_url(user) {
-    return replacer(this.endpoints.root + this.endpoints.categories.user, {user});
+
+  emojis_path() {
+    return this.endpoints.categories.emojis;
+  },
+
+  user_path(user) {
+    return replacer(this.endpoints.categories.user, {user});
   }
 };
 
@@ -38,6 +46,7 @@ const app = new Vue({
   },
 
   created: function() {
+    // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token'); // Axios add Authorization headers for default (vide https://github.com/feathersjs/authentication/issues/135)
     this.fetchData();
   },
 
@@ -48,29 +57,23 @@ const app = new Vue({
         this.message.loading = '666 ERROR';
         console.error(error);
       }
-      const onlyUsefulData = ((githubData) => {
-        return {
-          name: githubData.name,
-          html_url: githubData.html_url,
-          description: this.parserDescription(githubData.description),
-          language: githubData.language,
-          homepage: githubData.homepage,
-          gith_url: githubData.gith_url,
-          created_at: githubData.created_at,
-          updated_at: githubData.updated_at
-        };
+
+      const onlyUsefulData = githubData => ({
+        name: githubData.name,
+        html_url: githubData.html_url,
+        description: parserDescription(githubData.description),
+        language: githubData.language,
+        homepage: githubData.homepage,
+        gith_url: githubData.gith_url,
+        created_at: githubData.created_at,
+        updated_at: githubData.updated_at
       });
 
-      this.$http.get(gitHubAPI.user_url(this.username))
+      axios.create( gitHubAPI.HTTP_options() ).get( gitHubAPI.user_path(this.username) )
+        .then(response => { console.log(response.data.length); return response }) //§ verificar se os 30 foram retornados
         .then(response => this.my_repos = response.data.map(onlyUsefulData))
         .catch(errorCallback)
     },
-
-    parserDescription(description) {
-      let descriptionParsed = description || '';
-      descriptionParsed = descriptionParsed.replace(/\s?:\w+:\s?/g, '');
-      return descriptionParsed;
-    }
 
   }
 });
@@ -78,10 +81,30 @@ const app = new Vue({
 
 /**
  * @param {string} str
+ * @return {string}
+ */
+function parserDescription(str) {
+  const strParsed = str || '';
+  return removeEmojis( strParsed.replace(/\B:\w+:\B/g, '') );
+}
+
+/**
+ * Remove (quase) todos os emojis de uma string.
+ * (c) 'jony89' at https://stackoverflow.com/questions/10992921
+ * @param {string} str
+ * @return {string} A string sem a maioria dos emojis
+ */
+const removeEmojis = str => str.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '')
+
+/**
+ * Helper para substituir todas as ocorrências
+ * de uma string no formato ":key" pelo valor
+ * de "key" no objeto passado (parâmetro data).
+ * @param {string} str
  * @param {object} data
  * @return {string}
  */
 function replacer(str, data) {
-  const strReplace = (str, key) => str.replace( new RegExp(`\{${key}\}`, 'i'), data[key] );
-  return Object.keys(data).reduce(strReplace, str);
+  const strReplace = (str, key) => str.replace( new RegExp(`:${key}`, 'g'), data[key] );
+  return Object.keys(data).reduce(strReplace , str);
 };
