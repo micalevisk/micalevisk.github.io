@@ -29,7 +29,7 @@ const app = new Vue({
   data: {
     title: "Micalevisk's Public Repositories",
     message: {
-      title: 'Copyright (c) 2017',
+      title: 'Copyright (c) 2018',
       body: 'Heeeeeyy, byyeeeee',
       loading: 'loading...',
       author: {
