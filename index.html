@@ -8,16 +8,17 @@
    <body>
       <panel id="app">
 
-         <fieldset style="clear:both" id="description">
+         <fieldset id="description">
             <label>{{ title }}</label>
             <div>
-              <p style="font-size:small;">
+              <p>
                 {{ message.title }}&nbsp;<a :href="message.author.repo" target="_blank" title="github profile"><u>{{ message.author.name }}</u></a><br>
                 {{ message.body  }}
               </p>
+              <hr>
               <ol v-if="my_repos.length > 0">
                 <li v-for="my_repo in my_repos" :id="'repo_' + my_repo.name.toLowerCase()" :language="my_repo.language.toLowerCase()" :create-date="my_repo.created_at">
-                    <a :href="my_repo.html_url" :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()" target="_blank">{{ my_repo.name }}</a><br>
+                    <a :href="my_repo.html_url" :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()" target="_blank" rel="noopener">{{ my_repo.name }}</a><br>
                     <span class="repo-description">{{ parserDescription( my_repo.description ) }}</span><br>
                     <br>
                 </li>
@@ -26,6 +27,7 @@
                 <b v-html="message.loading"></b>
               </span>
             </div>
+          </fieldset>
 
       </panel>
 
