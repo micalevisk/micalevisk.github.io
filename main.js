@@ -10,6 +10,9 @@ const gitHubAPI = {
   HTTP_options() {
     return {
       baseURL: this.endpoints.root,
+      headers: {
+        Authorization: 'Bearer ' + this.token,  //§ não faz diferença FIXME
+      }
     }
   },
 
@@ -64,9 +67,43 @@ const app = new Vue({
         updated_at: githubData.updated_at
       });
 
+      /*
       axios.create( gitHubAPI.HTTP_options() ).get( gitHubAPI.user_path(this.username) )
+        .then(response => { console.log(response.data.length); return response })
         .then(response => this.my_repos = response.data.map(onlyUsefulData))
         .catch(errorCallback)
+      */
+
+      /*
+      const requestInfo = {
+        method: 'GET',
+        credentials: 'include',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${gitHubAPI.token}`,
+          'Cache-Control': 'no-cache',
+          'Access-Control-Allow-Origin': '*',
+          'mode': 'cors'
+        })
+      }
+
+      return fetch(gitHubAPI.endpoints.root + gitHubAPI.user_path(this.username), requestInfo)
+        .then(response => { console.log(response.data.length); return response })
+        .catch(errorCallback)
+      */
+
+      const self = this;
+      const xhr = new XMLHttpRequest();
+      xhr.onerror = errorCallback;
+      xhr.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) self.my_repos = JSON.parse(this.response)
+      };
+      xhr.open('GET', gitHubAPI.endpoints.root + gitHubAPI.user_path(this.username), true);
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('Authorization', 'Bearer ' + gitHubAPI.token); //§ não faz diferença FIXME
+      xhr.send();
     },
 
   }
