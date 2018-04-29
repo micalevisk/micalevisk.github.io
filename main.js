@@ -21,14 +21,14 @@ const gitHubGrapQLAPI = {
                   edges {
                     node {
                       name
-    }
-      }
-    }
+                    }
+                  }
+                }
               }
             }
           }
         }
-  },
+      },
     `
   }
 };
@@ -38,7 +38,7 @@ const app = new Vue({
   el: '#app',
 
   data: {
-    title: "Micalevisk's Public Repositories",
+    title: "Micalevisk's GitHub Repositories",
     message: {
       title: 'Copyright (c) 2018',
       body: 'Heeeeeyy, byyeeeee',
@@ -76,56 +76,15 @@ const app = new Vue({
       const errorCallback = error => {
         this.message.loading = '666 ERROR';
         console.error(error);
-      }
-
-      const onlyUsefulData = githubData => ({
-        name: githubData.name,
-        html_url: githubData.html_url,
-        description: parserDescription(githubData.description),
-        language: githubData.language,
-        homepage: githubData.homepage,
-        gith_url: githubData.gith_url,
-        created_at: githubData.created_at,
-        updated_at: githubData.updated_at
-      });
-
-      /*
-      axios.create( gitHubAPI.HTTP_options() ).get( gitHubAPI.user_path(this.username) )
-        .then(response => { console.log(response.data.length); return response })
-        .then(response => this.my_repos = response.data.map(onlyUsefulData))
-        .catch(errorCallback)
-      */
-
-      /*
-      const requestInfo = {
-        method: 'GET',
-        credentials: 'include',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${gitHubAPI.token}`,
-          'Cache-Control': 'no-cache',
-          'Access-Control-Allow-Origin': '*',
-          'mode': 'cors'
-        })
-      }
-
-      return fetch(gitHubAPI.endpoints.root + gitHubAPI.user_path(this.username), requestInfo)
-        .then(response => { console.log(response.data.length); return response })
-        .catch(errorCallback)
-      */
-
-      const self = this;
-      const xhr = new XMLHttpRequest();
-      xhr.onerror = errorCallback;
-      xhr.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) self.my_repos = JSON.parse(this.response)
       };
-      xhr.open('GET', gitHubAPI.endpoints.root + gitHubAPI.user_path(this.username), true);
-      xhr.setRequestHeader('Accept', 'application/json');
-      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('Authorization', 'Bearer ' + gitHubAPI.token); //§ não faz diferença FIXME
-      xhr.send();
+
+      const successCallback = ({ data }) => {
+        this.my_repos = parseGraphQLData(data.viewer.repositories.edges);
+      };
+
+      const client = GraphQL.makeClient(gitHubGrapQLAPI.endpoint)
+      client.setHeader('Authorization', 'bearer ' + gitHubGrapQLAPI.token);
+      client.query(gitHubGrapQLAPI.queries.getRepositories(100, 1), null, successCallback, errorCallback);
     },
 
   }
