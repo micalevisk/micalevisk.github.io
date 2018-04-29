@@ -59,7 +59,21 @@ const app = new Vue({
   methods: {
 
     fetchData() {
-      const errorCallback = (error) => {
+      const parseGraphQLData = repos => {
+        return repos.map(({ node }) => ({
+          name: node.name,
+          url: node.url,
+          description: parserDescription(node.description),
+          homepage: node.homepageUrl,
+          created_at: node.createdAt,
+          updated_at: node.updatedAt,
+          isFork: node.isFork,
+          isPrivate: node.isPrivate,
+          language: node.languages.edges[0].node.name,
+        }));
+      };
+
+      const errorCallback = error => {
         this.message.loading = '666 ERROR';
         console.error(error);
       }
