@@ -1,33 +1,47 @@
-const gitHubAPI = {
-  endpoints: {
-    root: 'https://api.github.com',
-    categories: { // endpoint categories
-      emojis: '/emojis',
-      user: '/users/:user/repos',
-    }
-  },
+(function __init__() {
 
-  HTTP_options() {
-    return {
-      baseURL: this.endpoints.root,
-    }
-  },
 
-  emojis_path() {
-    return this.endpoints.categories.emojis;
-  },
-
-  user_path(user) {
-    return replacer(this.endpoints.categories.user, {user});
+// https://developer.github.com/v4/explorer
+const gitHubGrapQLAPI = {
+  token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0', //§ private(?)
+  endpoint: 'https://api.github.com/graphql',
+  queries: {
+    getRepositories: (numberOfRepos, numberOfLangs) => `
+      query {
+        viewer {
+          repositories(first: ${numberOfRepos}) {
+            edges {
+              node {
+                name
+                url
+                description
+                homepageUrl
+                createdAt
+                updatedAt
+                isFork
+                isPrivate
+                languages(first: ${numberOfLangs}) {
+                  edges {
+                    node {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+    `
   }
 };
 
 
-const app = new Vue({
+new Vue({
   el: '#app',
 
   data: {
-    title: "Micalevisk's Public Repositories",
+    title: "Micalevisk's GitHub Repositories",
     message: {
       title: 'Copyright (c) 2018',
       body: 'Heeeeeyy, byyeeeee',
@@ -48,25 +62,32 @@ const app = new Vue({
   methods: {
 
     fetchData() {
-      const errorCallback = (error) => {
+      const parseGraphQLData = repos => {
+        return repos.map(({ node }) => ({
+          name: node.name,
+          url: node.url,
+          description: parserDescription(node.description),
+          homepage: node.homepageUrl,
+          created_at: node.createdAt,
+          updated_at: node.updatedAt,
+          isFork: node.isFork,
+          isPrivate: node.isPrivate,
+          language: node.languages.edges[0].node.name,
+        }));
+      };
+
+      const errorCallback = error => {
         this.message.loading = '666 ERROR';
         console.error(error);
-      }
+      };
 
-      const onlyUsefulData = githubData => ({
-        name: githubData.name,
-        html_url: githubData.html_url,
-        description: parserDescription(githubData.description),
-        language: githubData.language,
-        homepage: githubData.homepage,
-        gith_url: githubData.gith_url,
-        created_at: githubData.created_at,
-        updated_at: githubData.updated_at
-      });
+      const successCallback = ({ data }) => {
+        this.my_repos = parseGraphQLData(data.viewer.repositories.edges);
+      };
 
-      axios.create( gitHubAPI.HTTP_options() ).get( gitHubAPI.user_path(this.username) )
-        .then(response => this.my_repos = response.data.map(onlyUsefulData))
-        .catch(errorCallback)
+      const client = GraphQL.makeClient(gitHubGrapQLAPI.endpoint)
+      client.setHeader('Authorization', 'bearer ' + gitHubGrapQLAPI.token);
+      client.query(gitHubGrapQLAPI.queries.getRepositories(100, 1), null, successCallback, errorCallback);
     },
 
   }
@@ -90,15 +111,5 @@ function parserDescription(str) {
  */
 const removeEmojis = str => str.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '')
 
-/**
- * Helper para substituir todas as ocorrências
- * de uma string no formato ":key" pelo valor
- * de "key" no objeto passado (parâmetro data).
- * @param {string} str
- * @param {object} data
- * @return {string}
- */
-function replacer(str, data) {
-  const strReplace = (str, key) => str.replace( new RegExp(`:${key}`, 'g'), data[key] );
-  return Object.keys(data).reduce(strReplace , str);
-};
+
+}());
