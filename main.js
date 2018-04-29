@@ -1,27 +1,35 @@
-const gitHubAPI = {
-  endpoints: {
-    root: 'https://api.github.com',
-    categories: { // endpoint categories
-      emojis: '/emojis',
-      user: '/users/:user/repos',
+// https://developer.github.com/v4/explorer
+const gitHubGrapQLAPI = {
+  token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0', //§ private(?)
+  endpoint: 'https://api.github.com/graphql',
+  queries: {
+    getRepositories: (numberOfRepos, numberOfLangs) => `
+      query {
+        viewer {
+          repositories(first: ${numberOfRepos}) {
+            edges {
+              node {
+                name
+                url
+                description
+                homepageUrl
+                createdAt
+                updatedAt
+                isFork
+                isPrivate
+                languages(first: ${numberOfLangs}) {
+                  edges {
+                    node {
+                      name
     }
-  },
-
-  HTTP_options() {
-    return {
-      baseURL: this.endpoints.root,
-      headers: {
-        Authorization: 'Bearer ' + this.token,  //§ não faz diferença FIXME
       }
     }
+              }
+            }
+          }
+        }
   },
-
-  emojis_path() {
-    return this.endpoints.categories.emojis;
-  },
-
-  user_path(user) {
-    return replacer(this.endpoints.categories.user, {user});
+    `
   }
 };
 
