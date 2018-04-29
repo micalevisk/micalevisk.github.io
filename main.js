@@ -34,7 +34,7 @@ const gitHubGrapQLAPI = {
 };
 
 
-const app = new Vue({
+new Vue({
   el: '#app',
 
   data: {
