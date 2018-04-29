@@ -17,9 +17,15 @@
               </p>
               <hr>
               <ol v-if="my_repos.length > 0">
-                <li v-for="my_repo in my_repos" :id="'repo_' + my_repo.name.toLowerCase()" :language="my_repo.language.toLowerCase()" :create-date="my_repo.created_at">
-                    <a :href="my_repo.html_url" :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()" target="_blank" rel="noopener">{{ my_repo.name }}</a><br>
-                    <span class="repo-description">{{ parserDescription( my_repo.description ) }}</span><br>
+                <li v-for="my_repo in my_repos"
+                    :id="'repo_' + my_repo.name.toLowerCase()"
+                    :data-language="my_repo.language.toLowerCase()"
+                    :data-createdAt="my_repo.created_at">
+                  <!-- TODO: não usar a tag `a` quando my_repo.isPrivate -->
+                    <a :href="my_repo.homepage || my_repo.url"
+                       :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()"
+                       target="_blank" rel="noopener">{{ my_repo.name }}</a><br>
+                    <span class="repo-description">{{ my_repo.description }}</span><br>
                     <br>
                 </li>
               </ol>
