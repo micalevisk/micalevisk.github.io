@@ -21,11 +21,15 @@
                     :id="'repo_' + my_repo.name.toLowerCase()"
                     :data-language="my_repo.language.toLowerCase()"
                     :data-createdAt="my_repo.created_at">
-                  <!-- TODO: não usar a tag `a` quando my_repo.isPrivate -->
-                    <a :href="my_repo.homepage || my_repo.url"
+                    <a v-if="!my_repo.isPrivate"
+                       :href="my_repo.homepage || my_repo.url"
                        :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()"
-                       target="_blank" rel="noopener">{{ my_repo.name }}</a><br>
-                    <span class="repo-description">{{ my_repo.description }}</span><br>
+                       target="_blank" rel="noopener">{{ my_repo.name }}</a>
+                    <a v-else
+                       class="private"
+                       :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()">{{ my_repo.name }}</a>
+                    <br>
+                    <span v-if="my_repo.description.length" class="repo-description">{{ my_repo.description }} <br></span>
                     <br>
                 </li>
               </ol>
