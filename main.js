@@ -109,7 +109,8 @@ function parserDescription(str) {
  * @param {string} str
  * @return {string} A string sem a maioria dos emojis
  */
-const removeEmojis = str => str.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '')
+const removeEmojis = str =>
+  str.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '');
 
 
 }());
