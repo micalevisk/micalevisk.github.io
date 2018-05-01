@@ -83,6 +83,7 @@ function __init__() {
             isFork: node.isFork,
             isPrivate: node.isPrivate,
             language: node.languages.edges[0].node.name,
+            language_color: node.languages.edges[0].node.color
           }));
         };
 
