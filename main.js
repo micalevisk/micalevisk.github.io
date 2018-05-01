@@ -22,18 +22,12 @@ function __init__() {
             repositories(first: ${numberOfRepos}) {
               edges {
                 node {
-                  name
-                  url
-                  description
-                  homepageUrl
-                  createdAt
-                  updatedAt
-                  isFork
-                  isPrivate
+                  ...repoInfo
                   languages(first: ${numberOfLangs}) {
                     edges {
                       node {
                         name
+                        color
                       }
                     }
                   }
@@ -41,7 +35,18 @@ function __init__() {
               }
             }
           }
-        },
+        }
+
+        fragment repoInfo on Repository {
+          name
+          url
+          description
+          homepageUrl
+          createdAt
+          updatedAt
+          isFork
+          isPrivate
+        }
       `
     }
   };
