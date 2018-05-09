@@ -1,27 +1,16 @@
 (function () {
 
-const xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function () {
-  if (this.readyState == 4 && this.status == 200) {
-    const data = JSON.parse(this.responseText);
-    console.log(data)
-    try {
-      __init__(data);
-    } catch (e) {
-      document.body.childNodes[3].innerHTML = '&nbsp;:-(<br>&nbsp;Something went wrong';
-    }
-  }
-};
-  
-xmlhttp.open('GET', 'personal.json', true);
-xmlhttp.send();
+try {
+  __init__();
+} catch (e) {
+  document.body.childNodes[3].innerHTML = '&nbsp;:-(<br>&nbsp;Something went wrong';
+}
 
 
-function __init__({ token }) {
-  console.log(arguments)
+function __init__() {
   // https://developer.github.com/v4/explorer
   const gitHubGrapQLAPI = {
-    token,
+    token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0',
     endpoint: 'https://api.github.com/graphql',
     queries: {
       getRepositories: (numberOfRepos, numberOfLangs) => `
