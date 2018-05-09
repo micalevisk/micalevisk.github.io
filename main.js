@@ -75,18 +75,29 @@ function __init__() {
 
       fetchData() {
         const parseGraphQLData = repos => {
-          return repos.map(({ node }) => ({
-            name: node.name,
-            url: node.url,
-            description: parserDescription(node.description),
-            homepage: node.homepageUrl,
-            created_at: node.createdAt,
-            updated_at: node.updatedAt,
-            isFork: node.isFork,
-            isPrivate: node.isPrivate,
-            language: node.languages.edges[0].node.name,
-            language_color: node.languages.edges[0].node.color
-          }));
+          return repos.map(({ node }) => {
+            const languages = node.languages.edges;
+            const parsedRepos = {
+              name: node.name,
+              url: node.url,
+              description: parserDescription(node.description),
+              homepage: node.homepageUrl,
+              created_at: node.createdAt,
+              updated_at: node.updatedAt,
+              isFork: node.isFork,
+              isPrivate: node.isPrivate,
+              language: '',
+              language_color: '',
+            };
+
+            if (!!languages[0])
+              Object.assign({
+                language: languages[0].name,
+                language_color: languages[0].color
+              });
+
+            return parsedRepos;
+          });
         };
 
         const errorCallback = error => {
