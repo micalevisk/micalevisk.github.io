@@ -4,7 +4,7 @@ const xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function () {
   if (this.readyState == 4 && this.status == 200) {
     const data = JSON.parse(this.responseText);
-
+    console.log(data)
     try {
       __init__(data);
     } catch (e) {
@@ -18,7 +18,7 @@ xmlhttp.send();
 
 
 function __init__({ token }) {
-
+  console.log(arguments)
   // https://developer.github.com/v4/explorer
   const gitHubGrapQLAPI = {
     token,
