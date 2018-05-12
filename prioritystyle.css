@@ -3,6 +3,19 @@ svg {
   top: 0.3%;
 }
 
+*.unselectable {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+   -khtml-user-select: none;
+
+  /*
+    Introduced in IE 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .item-counter {
   position: absolute;
   top: 0;
