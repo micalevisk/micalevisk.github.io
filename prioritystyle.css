@@ -45,11 +45,13 @@ svg {
 }
 
 .repo-description {
-  padding: 1x;
   color: #8E8E93;
   font-size: .875em;
   line-height: 1.4em;
+  font-weight: bold;
   display: none;
+  text-align: center;
+  margin-top: 5px;
 }
 
 .trigger-wrapper:hover .repo-description {
