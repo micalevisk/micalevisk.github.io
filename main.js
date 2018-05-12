@@ -16,6 +16,7 @@ function __init__() {
       getRepositories: (numberOfRepos, numberOfLangs) => `
         query {
           viewer {
+            bio
             repositories(first: ${numberOfRepos}) {
               edges {
                 node {
@@ -107,6 +108,7 @@ function __init__() {
 
         const successCallback = ({ data }) => {
           this.my_repos = parseGraphQLData(data.viewer.repositories.edges);
+          this.message.body = parserDescription(data.viewer.bio);
         };
 
         const client = GraphQL.makeClient(gitHubGrapQLAPI.endpoint)
