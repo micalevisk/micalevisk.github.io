@@ -113,7 +113,7 @@ function __init__() {
 
         const client = GraphQL.makeClient(gitHubGrapQLAPI.endpoint)
         client.setHeader('Authorization', 'bearer ' + gitHubGrapQLAPI.token);
-        client.query(gitHubGrapQLAPI.queries.getRepositories(100, 1), null, successCallback, errorCallback);
+        client.query(gitHubGrapQLAPI.queries.getRepositories(100, 10), null, successCallback, errorCallback);
       },
 
     }
