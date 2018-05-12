@@ -31,6 +31,7 @@ svg {
 }
 
 .trigger-wrapper {
+  position: relative;
   margin-bottom: 5%;
   background: white;
   border-left: 6px solid white;
