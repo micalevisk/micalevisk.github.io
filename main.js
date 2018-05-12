@@ -17,7 +17,7 @@ function __init__() {
         query {
           viewer {
             bio
-            repositories(first: ${numberOfRepos}) {
+            repositories(first: ${numberOfRepos}, orderBy: { field: CREATED_AT,  direction: DESC }) {
               edges {
                 node {
                   ...repoInfo
