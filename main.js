@@ -1,5 +1,7 @@
 (function () {
 
+document.addEventListener('contextmenu', e => e.preventDefault());
+
 try {
   __init__();
 } catch (e) {
