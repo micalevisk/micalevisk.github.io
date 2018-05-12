@@ -78,7 +78,7 @@ function __init__() {
         const parseGraphQLData = repos => {
           return repos.map(({ node }) => {
             const languages = node.languages.edges;
-            const parsedRepos = {
+            let parsedRepos = {
               name: node.name,
               url: node.url,
               description: parserDescription(node.description),
@@ -87,15 +87,14 @@ function __init__() {
               updated_at: node.updatedAt,
               isFork: node.isFork,
               isPrivate: node.isPrivate,
-              language: '',
+              languages: [],
               language_color: '',
             };
 
-            if (!!languages[0])
-              Object.assign({
-                language: languages[0].name,
-                language_color: languages[0].color
-              });
+            if (!!languages[0]) {
+              parsedRepos.languages = languages.map( ({ node: {name, color} }) => ({name, color}) );
+              parsedRepos.language_color = parsedRepos.languages[0].color || '';
+            }
 
             return parsedRepos;
           });
