@@ -23,15 +23,13 @@
                 {{ message.body  }}
               </p>
               <hr>
-              <ol v-if="my_repos.length > 0">
-                <li v-for="my_repo in my_repos"
-                    :id="'repo_' + my_repo.name.toLowerCase()"
-                    :data-language="my_repo.language.toLowerCase()"
-                    :data-createdAt="my_repo.created_at">
+              <div v-if="my_repos.length > 0">
+                <div class="trigger-wrapper"  v-for="(my_repo, idx) in my_repos" v-bind:style="{ borderLeftColor: my_repo.language_color }">
+                  <div :id="'repo_' + my_repo.name.toLowerCase()" :data-createdAt="my_repo.created_at">
                     <a v-if="!my_repo.isPrivate"
                        :href="my_repo.homepage || my_repo.url"
                        :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()"
-                       target="_blank" rel="noopener">
+                       target="_blank" rel="noopener">{{ idx + 1 }}&nbsp;&#8259;&nbsp;
                        <svg v-if="my_repo.isFork"
                         class="octicon octicon-repo-forked"
                         version="1.1" width="10" viewBox="0 0 10 16" height="15">
@@ -43,16 +41,20 @@
                        {{ my_repo.name }}</a>
                     <a v-else
                        class="octicon octicon-lock repo-icon"
-                       :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()">
+                       :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()">{{ idx + 1 }}&nbsp;&#8259;&nbsp;
                        <svg
-                        class=""
                         viewBox="0 0 12 16" version="1.1" width="12" height="16"><path fill-rule="evenodd" d="M4 13H3v-1h1v1zm8-6v7c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V7c0-.55.45-1 1-1h1V4c0-2.2 1.8-4 4-4s4 1.8 4 4v2h1c.55 0 1 .45 1 1zM3.8 6h4.41V4c0-1.22-.98-2.2-2.2-2.2-1.22 0-2.2.98-2.2 2.2v2H3.8zM11 7H2v7h9V7zM4 8H3v1h1V8zm0 2H3v1h1v-1z"></path></svg>
                        {{ my_repo.name }}</a>
-                    <br>
-                    <span v-if="my_repo.description.length" class="repo-description">{{ my_repo.description }} <br></span>
-                    <br>
-                </li>
-              </ol>
+                  </div>
+                  <div>
+                    <span v-for="language in my_repo.languages" class="tag-color">
+                      {{ language.name }}
+                    </span>
+                    <span v-if="my_repo.description.length" class="repo-description">{{ my_repo.description }}</span>
+                  </div>
+                </div>
+
+              </div>
               <span v-else>
                 <b v-html="message.loading"></b>
               </span>
@@ -62,7 +64,7 @@
       </panel>
 
       <!-- Vue.js -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
       <script src="GraphQL.js"></script>
       <!-- our app code -->
       <script src="main.js"></script>
