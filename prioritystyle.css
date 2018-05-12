@@ -13,12 +13,12 @@ svg {
 }
 
 .tag-color {
-  color: inherit;
   display: inline-block;
   background: transparent;
   border-radius: 0px;
   white-space: nowrap;
   /* color: rgb(153, 153, 153); */
+  color: #032f62;
   opacity: 0.8;
   background: #eeeeee;
   padding: 0px 0.4em;
