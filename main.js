@@ -56,14 +56,14 @@ function __init__() {
     el: '#app',
 
     data: {
-      title: "Micalevisk's GitHub Repositories",
+      title: "Micalevisk GitHub Repositories",
       message: {
         title: 'Copyright (c) 2018',
         body: 'Heeeeeyy, byyeeeee',
         loading: 'loading...',
         author: {
-          name: 'Micael Levi',
-          repo: 'https://github.com/micalevisk'
+          name: 'Micael Levi L. C.',
+          profile: 'https://github.com/micalevisk'
         }
       },
       username: 'micalevisk',
