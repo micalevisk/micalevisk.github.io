@@ -15,7 +15,11 @@
             <label>{{ title }}</label>
             <div>
               <p>
-                {{ message.title }}&nbsp;<a :href="message.author.repo" target="_blank" title="github profile"><u>{{ message.author.name }}</u></a><br>
+                <small>
+                {{ message.title }}
+                <a :href="message.author.repo" target="_blank" title="github profile">
+                  <u>{{ message.author.name }}</u></a><br>
+                </small>
                 {{ message.body  }}
               </p>
               <hr>
