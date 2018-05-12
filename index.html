@@ -29,7 +29,7 @@
                   <div class="item-counter">{{ idx + 1 }}</div>
                   <div :id="'repo_' + my_repo.name.toLowerCase()" :data-createdAt="my_repo.created_at">
                     <a v-if="!my_repo.isPrivate"
-                       :href="my_repo.homepage || my_repo.url"
+                       :href="my_repo.isFork ? my_repo.url : (my_repo.homepage || my_repo.url)"
                        :title="'updated at ' + new Date(my_repo.updated_at).toLocaleString()"
                        target="_blank" rel="noopener">
                        <svg v-if="my_repo.isFork"
