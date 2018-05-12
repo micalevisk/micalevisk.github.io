@@ -1,6 +1,15 @@
 svg {
   position: relative;
-  top: 3px;
+  top: 0.3%;
+}
+
+.item-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2%;
+  opacity: 0.3;
+  font-weight: bold;
 }
 
 .tag-color {
