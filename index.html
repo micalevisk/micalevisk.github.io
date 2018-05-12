@@ -26,7 +26,7 @@
               <div unselectable="on" class="unselectable" v-if="my_repos.length > 0">
 
                 <div class="trigger-wrapper" v-for="(my_repo, idx) in my_repos" :style="{ borderLeftColor: my_repo.language_color }">
-                  <div class="item-counter">#{{ idx + 1 }}</div>
+                  <div class="item-counter">{{ idx + 1 }}</div>
                   <div :id="'repo_' + my_repo.name.toLowerCase()" :data-createdAt="my_repo.created_at">
                     <a v-if="!my_repo.isPrivate"
                        :href="my_repo.homepage || my_repo.url"
