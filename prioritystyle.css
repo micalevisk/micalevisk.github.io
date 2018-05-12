@@ -60,11 +60,10 @@ svg {
 .repo-description {
   color: #8E8E93;
   font-size: .875em;
-  line-height: 1.4em;
   font-weight: bold;
   display: none;
   text-align: center;
-  margin-top: 5px;
+  padding-top: 0.7%;
 }
 
 .trigger-wrapper:hover .repo-description {
