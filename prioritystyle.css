@@ -1,3 +1,14 @@
+#pie-chart {
+  color: #2ecc71;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+  font-weight: bold;
+}
+
+#pie-chart:hover {
+  opacity: 1;
+}
+
 svg {
   position: relative;
   top: 0.3%;
