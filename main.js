@@ -67,6 +67,7 @@ function __init__() {
         }
       },
       username: 'micalevisk',
+      search: '',
       my_repos: []
     },
 
@@ -116,6 +117,19 @@ function __init__() {
         client.setHeader('Authorization', 'bearer ' + gitHubGrapQLAPI.token);
         client.query(gitHubGrapQLAPI.queries.getRepositories(100, 10), null, successCallback, errorCallback);
       },
+
+    },
+
+    computed: {
+
+      filteredRepos() {
+        if (!this.search.trim()) return this.my_repos;
+        if (this.search.length > 0)
+          return this.my_repos.filter(({ languages }) => {
+            return languages.map(lang => lang.name.toLowerCase())
+                            .includes(this.search.toLowerCase());
+          });
+      }
 
     }
   });
