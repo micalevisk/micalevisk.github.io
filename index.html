@@ -18,8 +18,10 @@
               <p>
                 <small>
                 {{ message.title }}
-                <a :href="message.author.profile" target="_blank" title="github profile" rel="noopener">
-                  <u>{{ message.author.name }}</u></a><br>
+                <a :href="message.author.profile" target="_blank" title="github profile" rel="noopener"><u>{{ message.author.name }}</u></a>
+                <br>
+                <a id="pie-chart" href="https://ionicabizau.github.io/github-profile-languages/api.html?@micalevisk" rel="noopener">abrir gráfico de uso das linguagens</a>
+                <br>
                 </small>
                 {{ message.body  }}
               </p>
