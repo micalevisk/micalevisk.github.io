@@ -16,17 +16,17 @@
             <label>{{ title }}</label>
             <div>
               <header>
-              <p>
-                <small>
-                {{ message.title }}
-                <a :href="message.author.profile" target="_blank" title="github profile" rel="noopener"><u>{{ message.author.name }}</u></a>
-                <br>
-                <a id="pie-chart" href="https://ionicabizau.github.io/github-profile-languages/api.html?@micalevisk" rel="noopener">abrir gráfico de uso das linguagens</a>
-                <br>
-                </small>
-                {{ message.body  }}
-              </p>
-              <hr>
+                <p>
+                  <small>
+                    {{ message.title }}
+                    <a :href="message.author.profile" target="_blank" title="github profile" rel="noopener"><u>{{ message.author.name }}</u></a>
+                    <br>
+                    <a id="pie-chart" href="https://ionicabizau.github.io/github-profile-languages/api.html?@micalevisk" rel="noopener">abrir gráfico de uso das linguagens</a>
+                    <br>
+                  </small>
+                  {{ message.body  }}
+                </p>
+                <hr>
                 <input type="text" v-model="search" placeholder="filter by language">
               </header>
               <br>
