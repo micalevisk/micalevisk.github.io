@@ -56,7 +56,7 @@ function __init__() {
     el: '#app',
 
     data: {
-      title: "Micalevisk GitHub Repositories",
+      title: "Micalevisk's GitHub Repositories",
       message: {
         title: 'Copyright (c) 2018',
         body: 'Heeeeeyy, byyeeeee',
