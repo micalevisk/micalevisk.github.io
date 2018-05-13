@@ -9,6 +9,33 @@
   opacity: 1;
 }
 
+input[type=text] {
+  text-align: center;
+  color: #2c3e50;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #bdc3c7;
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+  height: 1px;
+  width: 9em;
+  font-size: 10px;
+
+  -webkit-transition: all 0.30s ease-in-out;
+     -moz-transition: all 0.30s ease-in-out;
+      -ms-transition: all 0.30s ease-in-out;
+       -o-transition: all 0.30s ease-in-out;
+          transition: all 0.30s ease-in-out;
+}
+
+input[type=text]:focus {
+  -webkit-box-shadow: 0 0 5px rgba(81, 107, 133, 0.3);
+     -moz-box-shadow: 0 0 5px rgba(81, 107, 133, 0.3);
+          box-shadow: 0 0 5px rgba(81, 107, 133, 0.3);
+  border: 1px solid rgba(81, 107, 133, 0.5);
+}
+
 svg {
   position: relative;
   top: 0.3%;
