@@ -115,6 +115,9 @@ svg {
   display: block;
 }
 
+header {
+  text-align: center;
+}
 
 
 /* Glyph, by Harry Roberts */
@@ -124,7 +127,6 @@ hr {
   border: none;
   border-top: medium double #212327;
   color: #212327;
-  text-align: center;
   opacity: 0.4;
 }
 
