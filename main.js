@@ -71,7 +71,7 @@ function __init__() {
           profile: 'https://github.com/micalevisk'
         }
       }
-      },
+    },
 
     created: function() {
       this.fetchData();
@@ -98,7 +98,7 @@ function __init__() {
 
             if (!!languages[0]) {
               parsedRepos.languages = languages.map( ({ node: {name, color} }) => ({name, color}) );
-              parsedRepos.language_color = parsedRepos.languages[0].color || '';
+              parsedRepos.language_color = getDeepValue(parsedRepos, ['languages', 0, 'color']) || '';
             }
 
             return parsedRepos;
@@ -106,13 +106,13 @@ function __init__() {
         };
 
         const errorCallback = error => {
-          this.message.loading = '666 ERROR';
+          this.message.loading = this.message.error;
           console.error(error);
         };
 
         const successCallback = ({ data }) => {
-          this.my_repos = parseGraphQLData(data.viewer.repositories.edges);
-          this.message.body = parserDescription(data.viewer.bio);
+          this.my_repos     = parseGraphQLData( getDeepValue(data, ['viewer', 'repositories', 'edges']) );
+          this.message.body = parserDescription( getDeepValue(data, ['viewer', 'bio']) ) || this.message.body;
         };
 
         const client = GraphQL.makeClient(gitHubGrapQLAPI.endpoint)
