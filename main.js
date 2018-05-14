@@ -10,6 +10,7 @@ try {
 
 
 function __init__() {
+
   // https://developer.github.com/v4/explorer
   const gitHubGrapQLAPI = {
     token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0',
