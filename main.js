@@ -154,6 +154,15 @@ function __init__() {
   const removeEmojis = str =>
     str.replace(/([\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2694-\u2697]|\uD83E[\uDD10-\uDD5D])/g, '');
 
+  /**
+   * Acesso seguro a valores profundamentes aninhados em um objeto.
+   * Adaptado de (c) 'sharifsbeat' at https://medium.com/javascript-inside/99bf72a0855a
+   * @param {object} obj - Objeto alvo do acesso das propriedades listadas
+   * @param {[string]} path - O "caminho" para o valor de `obj` a ser acessado
+   * @return {*} O valor da propriedade acessada ou `undefined` caso não exista
+   */
+  const getDeepValue = (obj, path) =>
+    path.reduce((xs, x) => (xs && x in xs) ? xs[x] : undefined, obj);
 
 }
 
