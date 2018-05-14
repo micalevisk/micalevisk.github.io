@@ -58,19 +58,20 @@ function __init__() {
 
     data: {
       title: "Micalevisk's GitHub Repositories",
+      username: 'micalevisk',
+      search: '',
+      my_repos: [],
       message: {
         title: 'Copyright (c) 2018',
         body: 'Heeeeeyy, byyeeeee',
+        error: '666 ERROR',
         loading: 'loading...',
         author: {
           name: 'Micael Levi L. C.',
           profile: 'https://github.com/micalevisk'
         }
+      }
       },
-      username: 'micalevisk',
-      search: '',
-      my_repos: []
-    },
 
     created: function() {
       this.fetchData();
