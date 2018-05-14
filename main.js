@@ -124,11 +124,10 @@ function __init__() {
 
       filteredRepos() {
         if (!this.search.trim()) return this.my_repos;
-        if (this.search.length > 0)
-          return this.my_repos.filter(({ languages }) => {
-            return languages.map(lang => lang.name.toLowerCase())
-                            .includes(this.search.toLowerCase());
-          });
+        return this.my_repos.filter(({ languages }) => {
+          return languages.map(lang => lang.name.toLowerCase())
+                          .includes(this.search.toLowerCase());
+        });
       }
 
     }
