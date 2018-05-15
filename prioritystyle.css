@@ -19,7 +19,7 @@ input[type=text] {
   outline: none;
   font-family: "Open Sans", sans-serif;
   width: 9em;
-  height: .4em;
+  height: .9em;
   font-size: 8px;
 
   -webkit-transition: all 0.30s ease-in-out;
