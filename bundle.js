@@ -1,10 +1,59 @@
-'use strict';
+"use strict";
 
 (function () {
 
   document.addEventListener('contextmenu', function (e) {
     return e.preventDefault();
   });
+
+  // (c) https://github.com/nwoodthorpe/GraphQL-Vanilla-JS
+  var GraphQL = function () {
+    function makeClient(endpoint) {
+      var requestHeaders = {};
+
+      // Provide some sanitization for the client
+      function sanitize(query_string) {
+        return query_string.replace(/[\n\r]*/g, "") // Remove newlines
+        .replace(/"/g, "\\\""); // Escape double quotes so JSON is valid
+      }
+
+      function query(query_string) {
+        var variables_string = arguments.length <= 1 || arguments[1] === undefined ? '{}' : arguments[1];
+        var resolve = arguments[2];
+        var reject = arguments[3];
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', endpoint, true);
+
+        for (var header in requestHeaders) {
+          if (!requestHeaders.hasOwnProperty(header)) continue;
+          xhr.setRequestHeader(header, requestHeaders[header]);
+        }
+
+        xhr.onerror = reject;
+
+        xhr.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            if (this.status === 200) resolve(JSON.parse(xhr.response));else reject(JSON.parse(xhr.response));
+          }
+        };
+
+        xhr.send("{ \"query\": \"" + sanitize(query_string) + "\", \"variables\": " + variables_string + " }");
+      }
+
+      function setHeader(key, value) {
+        requestHeaders[key] = value;
+      }
+
+      function unsetHeader(key) {
+        delete requestHeaders[key];
+      }
+
+      return { setHeader: setHeader, unsetHeader: unsetHeader, query: query };
+    }
+
+    return { makeClient: makeClient };
+  }();
 
   try {
     __init__();
@@ -20,7 +69,7 @@
       endpoint: 'https://api.github.com/graphql',
       queries: {
         getRepositories: function getRepositories(numberOfRepos, numberOfLangs) {
-          return '\n        query {\n          viewer {\n            bio\n            repositories(first: ' + numberOfRepos + ', orderBy: { field: CREATED_AT,  direction: DESC }) {\n              edges {\n                node {\n                  ...repoInfo\n                  languages(first: ' + numberOfLangs + ') {\n                    edges {\n                      node {\n                        name\n                        color\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n\n        fragment repoInfo on Repository {\n          name\n          url\n          description\n          homepageUrl\n          createdAt\n          updatedAt\n          isFork\n          isPrivate\n        }\n      ';
+          return "\n        query {\n          viewer {\n            bio\n            repositories(first: " + numberOfRepos + ", orderBy: { field: CREATED_AT,  direction: DESC }) {\n              edges {\n                node {\n                  ...repoInfo\n                  languages(first: " + numberOfLangs + ") {\n                    edges {\n                      node {\n                        name\n                        color\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n\n        fragment repoInfo on Repository {\n          name\n          url\n          description\n          homepageUrl\n          createdAt\n          updatedAt\n          isFork\n          isPrivate\n        }\n      ";
         }
       }
     };
