@@ -103,11 +103,19 @@ function __init__() {
       }
     },
 
-    created: function() {
+    created() {
       this.fetchData();
     },
 
     methods: {
+
+      getBorderStyle(color, idx) {
+        return {
+          '--border-color': color,
+          // fallback de `CSS variables`
+          [`border-${idx & 1 ? 'left': 'right'}-color`]: color
+        };
+      },
 
       fetchData() {
         const parseGraphQLData = repos => {
