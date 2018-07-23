@@ -104,7 +104,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       methods: {
         getBorderStyle: function getBorderStyle(color, idx) {
           return _defineProperty({
-            '--border-color': color
+            'border-bottom-color': color
           }, "border-" + (idx & 1 ? 'left' : 'right') + "-color", color);
         },
         fetchData: function fetchData() {

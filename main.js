@@ -81,7 +81,7 @@ function __init__() {
 
       getBorderStyle(color, idx) {
         return {
-          '--border-color': color,
+          'border-bottom-color': color,
           // fallback de `CSS variables`
           [`border-${idx & 1 ? 'left': 'right'}-color`]: color
         };
