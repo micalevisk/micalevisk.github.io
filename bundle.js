@@ -1,5 +1,7 @@
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 (function () {
 
   document.addEventListener('contextmenu', function (e) {
@@ -98,13 +100,19 @@
         this.fetchData();
       },
 
+
       methods: {
+        getBorderStyle: function getBorderStyle(color, idx) {
+          return _defineProperty({
+            '--border-color': color
+          }, "border-" + (idx & 1 ? 'left' : 'right') + "-color", color);
+        },
         fetchData: function fetchData() {
           var _this = this;
 
           var parseGraphQLData = function parseGraphQLData(repos) {
-            return repos.map(function (_ref) {
-              var node = _ref.node;
+            return repos.map(function (_ref2) {
+              var node = _ref2.node;
 
               var languages = node.languages.edges;
               var parsedRepos = {
@@ -121,10 +129,10 @@
               };
 
               if (!!languages[0]) {
-                parsedRepos.languages = languages.map(function (_ref2) {
-                  var _ref2$node = _ref2.node;
-                  var name = _ref2$node.name;
-                  var color = _ref2$node.color;
+                parsedRepos.languages = languages.map(function (_ref3) {
+                  var _ref3$node = _ref3.node;
+                  var name = _ref3$node.name;
+                  var color = _ref3$node.color;
                   return { name: name, color: color };
                 });
                 parsedRepos.language_color = getDeepValue(parsedRepos, ['languages', 0, 'color']) || '';
@@ -139,8 +147,8 @@
             console.error(error);
           };
 
-          var successCallback = function successCallback(_ref3) {
-            var data = _ref3.data;
+          var successCallback = function successCallback(_ref4) {
+            var data = _ref4.data;
 
             _this.my_repos = parseGraphQLData(getDeepValue(data, ['viewer', 'repositories', 'edges']));
             _this.message.body = parserDescription(getDeepValue(data, ['viewer', 'bio'])) || _this.message.body;
@@ -157,8 +165,8 @@
           var _this2 = this;
 
           if (!this.search.trim()) return this.my_repos;
-          return this.my_repos.filter(function (_ref4) {
-            var languages = _ref4.languages;
+          return this.my_repos.filter(function (_ref5) {
+            var languages = _ref5.languages;
 
             return languages.map(function (lang) {
               return lang.name.toLowerCase();
