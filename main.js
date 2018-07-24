@@ -11,46 +11,27 @@ try {
 
 function __init__() {
 
-  // https://developer.github.com/v4/explorer
-  const gitHubGrapQLAPI = {
-    token: '9db70dc3b25b0757b6263383bb2e9496d04c29f0',
-    endpoint: 'https://api.github.com/graphql',
-    queries: {
-      getRepositories: (numberOfRepos, numberOfLangs) => `
-        query {
-          viewer {
-            bio
-            repositories(first: ${numberOfRepos}, orderBy: { field: CREATED_AT,  direction: DESC }) {
-              edges {
-                node {
-                  ...repoInfo
-                  languages(first: ${numberOfLangs}) {
-                    edges {
-                      node {
-                        name
-                        color
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+  const FUNCTIONS_ENDPOINT = 'https://wt-89c6c15cc2042eb4fe4b1fb85909cac3-0.sandbox.auth0-extend.com/fetchMicaleviskRepos';
 
-        fragment repoInfo on Repository {
-          name
-          url
-          description
-          homepageUrl
-          createdAt
-          updatedAt
-          isFork
-          isPrivate
-        }
-      `
-    }
-  };
+  /**
+   *
+   * @param {(data: Object) => void} onSuccess
+   * @param {(data: Object) => void} onError
+   */
+  function fetchDataFromRestAPI(onSuccess, onError) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', FUNCTIONS_ENDPOINT, true);
+    xhr.onerror = onError;
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        (   xhr.status === 200
+          ? onSuccess
+          : onError
+        )( JSON.parse(xhr.response) );
+      }
+    };
+    xhr.send();
+  }
 
 
   new Vue({
@@ -123,9 +104,7 @@ function __init__() {
           this.message.body = parserDescription( getDeepValue(data, ['viewer', 'bio']) ) || this.message.body;
         };
 
-        const client = GraphQL.makeClient(gitHubGrapQLAPI.endpoint)
-        client.setHeader('Authorization', 'bearer ' + gitHubGrapQLAPI.token);
-        client.query(gitHubGrapQLAPI.queries.getRepositories(100, 10), null, successCallback, errorCallback);
+        fetchDataFromRestAPI(successCallback, errorCallback);
       },
 
     },
