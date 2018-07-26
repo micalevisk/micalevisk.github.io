@@ -12,6 +12,24 @@ try {
 function __init__() {
 
   const FUNCTIONS_ENDPOINT = 'https://wt-89c6c15cc2042eb4fe4b1fb85909cac3-0.sandbox.auth0-extend.com/fetchMicaleviskRepos';
+  const RULES = {
+    IGNORE: ({ description }) => description.includes(':guardsman:'),
+    SHOW_URL: (nodeRepo) => {
+      if (!nodeRepo.isPrivate || nodeRepo.description.includes(':unlock:')) {
+        return nodeRepo.isFork
+             ? nodeRepo.url
+             : (nodeRepo.homepageUrl || nodeRepo.url);
+      }
+    },
+  };
+
+
+  /**
+   * @param {Repository} nodeRepo https://developer.github.com/v4/object/repository/#fields
+   * @param {string} rule
+   * @return {string|null}
+   */
+  const checkRule = (nodeRepo, rule) => RULES[rule](nodeRepo);
 
   /**
    *
@@ -100,9 +118,11 @@ function __init__() {
 
       fetchData() {
         const parseGraphQLData = repos => {
-          return repos.map(({ node }) => {
+          return repos.reduce((parsedRepos, { node }) => {
+            if ( checkRule(node, 'IGNORE') ) return parsedRepos;
+
             const languages = node.languages.edges;
-            let parsedRepos = {
+            const parsedRepo = {
               name: node.name,
               url: node.url,
               description: parserDescription(node.description),
@@ -113,15 +133,18 @@ function __init__() {
               isPrivate: node.isPrivate,
               languages: [],
               language_color: '',
+              href: checkRule(node, 'SHOW_URL'),
+              owner: node.owner.login,
             };
 
             if (!!languages[0]) {
-              parsedRepos.languages = languages.map( ({ node: {name, color} }) => ({name, color}) );
-              parsedRepos.language_color = getDeepValue(parsedRepos, ['languages', 0, 'color']) || '';
+              parsedRepo.languages = languages.map( ({ node: {name, color} }) => ({name, color}) );
+              parsedRepo.language_color = getDeepValue(parsedRepo, ['languages', 0, 'color']) || '';
             }
 
+            parsedRepos.push(parsedRepo);
             return parsedRepos;
-          });
+          }, []);
         };
 
         const errorCallback = error => {
