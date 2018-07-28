@@ -13,13 +13,10 @@ function __init__() {
 
   const FUNCTIONS_ENDPOINT = 'https://wt-89c6c15cc2042eb4fe4b1fb85909cac3-0.sandbox.auth0-extend.com/fetchMicaleviskRepos';
   const RULES = {
-    IGNORE: ({ description }) => description.includes(':guardsman:'),
-    SHOW_URL: (nodeRepo) => {
-      if (!nodeRepo.isPrivate || nodeRepo.description.includes(':unlock:')) {
-        return nodeRepo.isFork
-             ? nodeRepo.url
-             : (nodeRepo.homepageUrl || nodeRepo.url);
-      }
+    IGNORE:   ({ description }) => description && description.includes(':guardsman:'),
+    SHOW_URL: ({ isPrivate, isFork, url, homepageUrl, description}) => {
+      if (!isPrivate || (description && description.includes(':unlock:')))
+        return isFork ? url : (homepageUrl || url);
     },
   };
 
