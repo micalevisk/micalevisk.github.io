@@ -79,7 +79,7 @@ function __init__() {
    * @return {*} O valor da propriedade acessada ou `undefined` caso não exista
    */
   const getDeepValue = (obj, path) =>
-    path.reduce((xs, x) => (xs && x in xs) ? xs[x] : undefined, obj);
+    path.reduce((xs, x) => ((xs instanceof Object) && (x in xs)) ? xs[x] : undefined, obj);
 
 
   new Vue({
