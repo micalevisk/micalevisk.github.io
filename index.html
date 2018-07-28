@@ -60,7 +60,7 @@
                         {{ my_repo.name }}</a>
                     </div>
                     <div>
-                      <span v-for="language in my_repo.languages" class="tag-color">{{ language.name }}</span>
+                      <span v-for="({name}) in my_repo.languages" class="tag-color" v-text="name"></span>
                       <span v-if="my_repo.description.length" class="repo-description">{{ my_repo.description }}</span>
                     </div>
                   </div>
