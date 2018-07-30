@@ -60,6 +60,33 @@ const removeEmojis = str =>
  * @returns {string}
  */
 export function parserDescription(str) {
-  const strParsed = str || '';
-  return removeEmojis( strParsed.replace(/\B:\w+:\B/g, '') );
+  if (!str) return '';
+  return removeEmojis( str.replace(/\B:\w+:\B/g, '') );
 }
+
+
+/**
+ * Wrapper para utilizar o `local storage`
+ * com um contador (em ms).
+ * (c) https://gist.github.com/anhang/1096149
+ */
+export const localStorageWithExpiration = {
+  save(key, jsonData, expirationMS) {
+    if (typeof Storage === 'undefined') return false;
+    const record = {
+      value: JSON.stringify(jsonData),
+      timestamp: new Date().getTime() + expirationMS
+    };
+
+    localStorage.setItem(key, JSON.stringify(record));
+    return jsonData;
+  },
+
+  load(key) {
+    if (typeof Storage === 'undefined') return false;
+    const record = JSON.parse( localStorage.getItem(key) );
+    if (!record) return false;
+
+    return (new Date().getTime() < record.timestamp) && JSON.parse(record.value);
+  }
+};
