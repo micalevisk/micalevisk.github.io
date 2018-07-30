@@ -36,9 +36,13 @@
 import BackToTop from 'vue-backtotop'
 import About from './components/About'
 import ReposContainer from './components/ReposContainer'
-import { toTitleCase, parserDescription, getDeepValue, fetchDataFromRestAPI } from './utils'
-// import REPOS from './__fakedata'
+import { toTitleCase, parserDescription, getDeepValue, fetchDataFromRestAPI, localStorageWithExpiration } from './utils'
 
+
+const LOCALSTORAGE = {
+  key: Symbol('ls2').toString(),
+  duration: 1000 * 60 * 1
+};
 
 const RULES = {
   IGNORE:   ({ description }) => description && description.includes(':guardsman:'),
@@ -150,16 +154,19 @@ export default {
         this.finalizarFetch()
         // eslint-disable-next-line
         console.error(error.message)
-      };
-
-      const successCallback = ({ data }) => {
-        this.myRepos    = parseGraphQLData( getDeepValue(data, ['viewer', 'repositories', 'edges']) )
-        this.header.body = parserDescription( getDeepValue(data, ['viewer', 'bio']) ) || this.header.body
-        this.finalizarFetch()
       }
 
-      fetchDataFromRestAPI(successCallback, errorCallback)
-      // successCallback(REPOS)
+      const successCallback = (ghData, save = true) => {
+        this.myRepos     = parseGraphQLData( getDeepValue(ghData, ['data', 'viewer', 'repositories', 'edges']) )
+        this.header.body = parserDescription( getDeepValue(ghData, ['data', 'viewer', 'bio']) ) || this.header.body
+        this.finalizarFetch()
+        if (save) localStorageWithExpiration.save(LOCALSTORAGE.key, ghData, LOCALSTORAGE.duration)
+      }
+
+      // tentar recuperar dados cached
+      const savedData = localStorageWithExpiration.load(LOCALSTORAGE.key)
+      if (savedData) successCallback(savedData, false)
+      else fetchDataFromRestAPI(successCallback, errorCallback)
     }
 
   }
