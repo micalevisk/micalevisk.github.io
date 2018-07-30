@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Courier+New');
+@import url('../../node_modules/@fortawesome/fontawesome-free/css/all.min.css');
+@import url('./layout.css');
+
 body {
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
@@ -8,7 +12,7 @@ fieldset {
 }
 
 input[type=text] {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   text-align: center;
   color: #004466;
   padding: 10px;
@@ -43,13 +47,12 @@ input[type=text]:focus {
 }
 
 a {
-  /* font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; */
   font-weight: 600;
 }
 
 svg {
   position: relative;
-  top: 0.3%;
+  top: 10.3%;
 }
 
 *.unselectable {
