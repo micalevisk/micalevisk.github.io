@@ -1,0 +1,9 @@
+{
+  "name": "fetch-micalevisk-repos",
+  "version": "1.0.0",
+  "main": "fetchMicaleviskRepos.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
