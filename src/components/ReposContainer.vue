@@ -74,11 +74,12 @@ export default {
   computed: {
 
     filteredRepos() {
-      return ( !this.filter.trim() )
+      const filter = this.filter.trim()
+      return (!filter)
             ? this.repos
             : this.repos.filter(({ languages }) =>
                 languages.map(lang => lang.name.toLowerCase())
-                         .includes(this.filter.toLowerCase()))
+                         .includes(filter.toLowerCase()))
     }
 
   }
