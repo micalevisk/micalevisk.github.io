@@ -22,7 +22,7 @@ body {
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-body > panel {
+body > .panel {
 	display: block;
 	width: 100%;
 	margin: 0;
@@ -35,7 +35,7 @@ body > panel {
 	text-align:left;
 }
 
-body > panel > fieldset {
+body > .panel > fieldset {
 	display: block;
 	padding: 0 15px;
 	background-color: white;
@@ -44,17 +44,17 @@ body > panel > fieldset {
 	border:0;
 }
 
-body > panel > fieldset+fieldset {
+body > .panel > fieldset+fieldset {
 	margin-left:15px;
 	padding-left: 0;
 	border-top: 1px solid #c8c7cc;
 }
 
-body > panel > fieldset:last-child {
+body > .panel > fieldset:last-child {
 	padding-bottom:1px;
 }
 
-body > panel > fieldset.alert {
+body > .panel > fieldset.alert {
 	font-weight: bold;
 	font-size: 15px;
 	padding-top: 14px;
@@ -62,22 +62,22 @@ body > panel > fieldset.alert {
 	text-align:center;
 }
 
-body > panel > fieldset.alert > div > a {
+body > .panel > fieldset.alert > div > a {
 	display:block;
 	width:100%;
 }
 
-body > panel > fieldset.alert > div > a:link, body > panel > fieldset.alert > div > a:visited {
+body > .panel > fieldset.alert > div > a:link, body > .panel > fieldset.alert > div > a:visited {
 	color:white;
 	text-decoration:none;
 }
 
-body > panel > fieldset.warn {
+body > .panel > fieldset.warn {
 	color: white;
 	background-color: #ff3824;
 }
 
-body > panel > fieldset.okay {
+body > .panel > fieldset.okay {
 	color: white;
 	background-color: MediumSeaGreen;
 }
@@ -90,7 +90,7 @@ p {
 	text-align:center;
 }
 
-body > panel > fieldset > label {
+body > .panel > fieldset > label {
 	font-size: 17px;
 	display: block;
 	color:black;
@@ -101,32 +101,32 @@ body > panel > fieldset > label {
 }
 
 
-body > panel > fieldset > label > a > img.icon,
-body > panel > fieldset > div > img.icon {
+body > .panel > fieldset > label > a > img.icon,
+body > .panel > fieldset > div > img.icon {
 	display:none;
 }
 
-body > panel > fieldset > div a:link, body > panel > fieldset > div a:visited {
+body > .panel > fieldset > div a:link, body > .panel > fieldset > div a:visited {
 	text-decoration:none;
 	color: #0076ff;
 }
 
-body > panel > fieldset > div > p a:link, body > panel > fieldset > div > p a:visited {
+body > .panel > fieldset > div > p a:link, body > .panel > fieldset > div > p a:visited {
 	text-decoration:none;
 	color: #0076ff;
 }
 
-body > panel > fieldset > label a:link, body > panel > fieldset > label a:visited {
+body > .panel > fieldset > label a:link, body > .panel > fieldset > label a:visited {
 	text-decoration:none;
 	color: #0076ff;
 }
 
-body > panel > fieldset > a.button:link, body > panel > fieldset > a.button:visited {
+body > .panel > fieldset > a.button:link, body > .panel > fieldset > a.button:visited {
 	text-decoration:none;
 	color: #0076ff;
 }
 
-body > panel > fieldset > a.button {
+body > .panel > fieldset > a.button {
 	display: block;
 	width: 100%;
 	padding-left: 0;
@@ -140,22 +140,20 @@ body > panel > fieldset > a.button {
 	margin-top:2px;
 	margin-bottom:2px;
 	background-repeat: no-repeat;
-	background-image: url(ios7-chevron.png);
 	background-position: right;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-	body > panel > fieldset > a.button {
-		background-image: url(ios7-chevron@2x.png);
+	body > .panel > fieldset > a.button {
 		background-size:8px 13px;
 	}
 }
 
-body > panel > fieldset > div {
+body > .panel > fieldset > div {
 padding-bottom: 14px;
 }
 
-body > panel > fieldset > div iframe {
+body > .panel > fieldset > div iframe {
 	display:block;
 	margin:8px auto;
 	outline: solid rgba(204,204,204,0.3) 1px;
@@ -164,16 +162,16 @@ body > panel > fieldset > div iframe {
 	transform: scale(1.08);
 }
 
-body > panel > fieldset > div {
+body > .panel > fieldset > div {
 	margin-top:0px;
 	margin-bottom:8px;
 }
 
-body > panel > fieldset > div > p+p {
+body > .panel > fieldset > div > p+p {
 	margin-top:9px;
 }
 
-body > panel > fieldset > div img {
+body > .panel > fieldset > div img {
 	outline: solid rgba(204,204,204,0.3) 1px;
 	outline-offset: -1px;
 	zoom: 1.05;
@@ -181,7 +179,7 @@ body > panel > fieldset > div img {
 	margin:5px 2px
 }
 
-/* body > panel > fieldset > div * {
+/* body > .panel > fieldset > div * {
 	font-size: inherit !important;
 } */
 
@@ -189,19 +187,19 @@ body > panel > fieldset > div img {
 	font-size: 12px;
 }
 
-body > panel > fieldset > div > table.information {
+body > .panel > fieldset > div > table.information {
 	margin-left:34px;
 }
 
-body > panel > fieldset > div > table.information > tbody > tr > td {
+body > .panel > fieldset > div > table.information > tbody > tr > td {
 	padding-bottom: 5px;
 }
 
-body > panel > fieldset > div > table.information > tbody > tr:last-child > td {
+body > .panel > fieldset > div > table.information > tbody > tr:last-child > td {
 	padding-bottom: 0px;
 }
 
-body > panel > fieldset > div > table.information > tbody > tr > td.key {
+body > .panel > fieldset > div > table.information > tbody > tr > td.key {
 	color:#999;
 	padding-right:14px;
 	text-align:right;
@@ -248,19 +246,19 @@ body.pinstripe {
 	-webkit-animation-name: screenshots;
 }
 
-body.pinstripe > panel{
+body.pinstripe > div{
 	background:none !important;
 	text-align:center;
 	border:0;
 }
 
-body.pinstripe > panel > fieldset > div > p {
+body.pinstripe > div > fieldset > div > p {
 	margin:15px inherit;
 }
 
 
 
-body.pinstripe > panel > img{
+body.pinstripe > div > img{
 	margin:8px 0;
 	outline: solid rgba(204,204,204,0.3) 1px;
 	outline-offset: -1px;
@@ -269,16 +267,16 @@ body.pinstripe > panel > img{
 
 }
 
-body.pinstripe > panel > div#scroller {
+body.pinstripe > div > div#scroller {
 	text-align:center !important;
 }
 
-body.pinstripe > panel > div#scroller > div.horizontal-scroll-area {
+body.pinstripe > div > div#scroller > div.horizontal-scroll-area {
 	width:320px !important;
 	margin: 0 auto;
 }
 
-body.pinstripe > panel > div#scroller > div.horizontal-scroll-area > img {
+body.pinstripe > div > div#scroller > div.horizontal-scroll-area > img {
 	margin:8px 0;
 }
 
@@ -288,34 +286,34 @@ body div.center {
 }
 
 @media (min-width: 375px) {
-	body > panel > fieldset > div img{
+	body > .panel > fieldset > div img{
 		zoom: 1.25;
 		-moz-transform: scale(1.25);
 	}
 
-	body > panel > fieldset > div iframe {
+	body > .panel > fieldset > div iframe {
 		zoom: 1.27;
 		-moz-transform: scale(1.27);
 	}
 
-	body.pinstripe > panel > img {
+	body.pinstripe > div > img {
 		zoom: 1.05;
 		-moz-transform: scale(1.05);
 	}
 }
 
 @media (min-width: 414px) {
-	body > panel > fieldset > div img{
+	body > .panel > fieldset > div img{
 		zoom: 1.38;
 		-moz-transform: scale(1.38);
 	}
 
-	body > panel > fieldset > div iframe {
+	body > .panel > fieldset > div iframe {
 		zoom: 1.42;
 		-moz-transform: scale(1.42);
 	}
 
-	body.pinstripe > panel > img {
+	body.pinstripe > div > img {
 		zoom: 1.18;
 		-moz-transform: scale(1.18);
 	}
