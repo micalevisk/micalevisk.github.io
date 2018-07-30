@@ -2,6 +2,9 @@
   <div id="app" class="panel">
     <vue-headful v-once
                  :title="`@${usernameGithub} ~ gh repos`" />
+    <back-to-top bottom="50px" right="50px">
+      <button type="button" class="btn btn-info btn-to-top"><i class="fas fa-arrow-circle-up"></i></button>
+    </back-to-top>
 
     <fieldset>
 
@@ -30,9 +33,11 @@
 </template>
 
 <script>
+import BackToTop from 'vue-backtotop'
 import About from './components/About'
 import ReposContainer from './components/ReposContainer'
 import { toTitleCase, parserDescription, getDeepValue, fetchDataFromRestAPI } from './utils'
+// import REPOS from './__fakedata'
 
 
 const RULES = {
@@ -62,8 +67,8 @@ const checkRule = (nodeRepo, rule) => RULES[rule](nodeRepo)
 function parseGraphQLData(repos) {
   return repos.reduce((parsedRepos, { node }) => {
     if ( checkRule(node, 'IGNORE') ) return parsedRepos
+    const languages = node.languages.edges
 
-    const languages = node.languages.edges;
     const parsedRepo = {
       name: node.name,
       url: node.url,
@@ -85,8 +90,8 @@ function parseGraphQLData(repos) {
       parsedRepo.language_color = getDeepValue(parsedRepo, ['languages', 0, 'color']) || ''
     }
 
-    parsedRepos.push(parsedRepo);
-    return parsedRepos;
+    parsedRepos.push(parsedRepo)
+    return parsedRepos
   }, [])
 }
 
@@ -96,6 +101,7 @@ export default {
 
   components: {
     About,
+    BackToTop,
     ReposContainer,
   },
 
@@ -153,16 +159,28 @@ export default {
       }
 
       fetchDataFromRestAPI(successCallback, errorCallback)
+      // successCallback(REPOS)
     }
 
   }
 }
 </script>
 
-<style src="./assets/layout.css"></style>
 <style src="./assets/app.css"></style>
 
 <style scoped>
+.btn-to-top {
+  width: 60px;
+  height: 60px;
+  padding: 10px 16px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 22px;
+  color: #004466;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
 @keyframes blink {
   0% {
     opacity: .2;
