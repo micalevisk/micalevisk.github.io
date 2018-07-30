@@ -1,4 +1,4 @@
-const FUNCTIONS_ENDPOINT = 'https://wt-89c6c15cc2042eb4fe4b1fb85909cac3-0.sandbox.auth0-extend.com/fetchMicaleviskRepos';
+const FUNCTIONS_ENDPOINT = 'https://wt-89c6c15cc2042eb4fe4b1fb85909cac3-0.sandbox.auth0-extend.com/fetch-micalevisk-repos';
 
 
 /**
