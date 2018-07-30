@@ -2,9 +2,9 @@
   <div class="repos-container">
 
     <template v-if="filteredRepos.length">
-      <li v-for="(my_repo, idx_repo) in filteredRepos"
+      <li v-for="(my_repo, idx_repo) in filteredRepos" :id="idx_repo"
           :style="getBorderStyle(my_repo.language_color, idx_repo)" :key="idx_repo" class="trigger-wrapper">
-        <div class="item-counter">{{ idx_repo + 1 }}</div>
+        <a :href="`#${idx_repo}`" class="item-counter">{{ idx_repo + 1 }}</a>
 
         <div :id="`repo_${my_repo.name.toLowerCase()}`" :data-createdAt="my_repo.created_at">
 
@@ -100,8 +100,17 @@ li {
   right: 0;
   margin: 2%;
   opacity: 1;
+}
+
+.item-counter,
+.item-counter:hover,
+.item-counter:visited,
+.item-counter:active,
+.item-counter:link {
   color: #e3e3e3;
   font-weight: bold;
+  text-decoration: none;
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👆</text></svg>") 16 0,auto;
 }
 
 .tag-color {
@@ -129,7 +138,6 @@ li {
   border: 2px solid #e3e3e3;
   border-radius: 4px;
   border-bottom-color: #e3e3e3;
-  font-family: Pacifico;
 }
 
 .trigger-wrapper:nth-child(even) {
@@ -145,7 +153,6 @@ li {
 .repo-description {
   color: #8E8E93;
   font-size: .875em;
-  font-weight: bold;
   display: none;
   text-align: center;
   padding-top: 0.7%;
@@ -153,6 +160,10 @@ li {
 
 .trigger-wrapper:hover .repo-description {
   display: block;
+}
+
+a {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
 a.octicon-lock {
