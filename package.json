@@ -7,7 +7,8 @@
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build": "cross-env NODE_ENV=production vue-cli-service build --dest dist",
-    "gh:deploy": "push-dir --dir=dist --branch=master --cleanup --verbose"
+    "gh:deploy": "push-dir --dir=dist --branch=master --cleanup --verbose",
+    "wt:update": "cd functions && wt update fetch-micalevisk-repos fetchMicaleviskRepos.js"
   },
   "dependencies": {
     "vue": "^2.5.16",
