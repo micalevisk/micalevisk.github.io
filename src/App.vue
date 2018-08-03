@@ -3,7 +3,7 @@
     <vue-headful v-once
                  :title="`@${usernameGithub} ~ gh repos`" />
     <back-to-top bottom="50px" right="50px">
-      <button type="button" class="btn btn-info btn-to-top"><i class="fas fa-arrow-circle-up"></i></button>
+      <div class="scroll-to-top"><i class="fa fa-angle-up"></i></div>
     </back-to-top>
 
     <fieldset>
@@ -176,16 +176,28 @@ export default {
 <style src="./assets/app.css"></style>
 
 <style scoped>
-.btn-to-top {
-  width: 60px;
-  height: 60px;
-  padding: 10px 16px;
-  border-radius: 50%;
-  font-size: 22px;
-  line-height: 22px;
-  color: #004466;
+.scroll-to-top {
+  background: #363636;
+  background: rgba(100, 100, 100, 0.4);
+  color: #FFF;
+  bottom: 4%;
   cursor: pointer;
-  opacity: 0.5;
+  position: fixed;
+  right: 20px;
+  z-index: 999;
+  text-align: center;
+  line-height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  -webkit-transition: background-color 0.3s linear;
+     -moz-transition: background-color 0.3s linear;
+       -o-transition: background-color 0.3s linear;
+          transition: background-color 0.3s linear;
+}
+
+.scroll-to-top:hover {
+  background-color:#004466;
+  opacity: .8;
 }
 
 @keyframes blink {
