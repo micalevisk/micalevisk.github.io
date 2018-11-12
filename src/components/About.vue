@@ -52,5 +52,6 @@ a:active,
 a:link {
   color: #004466;
   text-decoration: none;
+  padding: 0 0.4%;
 }
 </style>
