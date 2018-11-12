@@ -7,8 +7,8 @@
            target="_blank" title="GitHub Profile" rel="noopener">
         </a>
         <br>
-        <a :href="githubProfileLanguagesAPI"
-           id="pie-chart" target="_blank" rel="noopener">
+        &raquo;<a :href="githubProfileLanguagesAPI"
+           target="_blank" title="pie chart with profile languages" rel="noopener">
           acessar gráfico de uso das linguagens
         </a>
         <br>
