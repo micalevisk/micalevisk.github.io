@@ -12,6 +12,11 @@
           acessar gráfico de uso das linguagens
         </a>
         <br>
+        &raquo;<a :href="gistWithTasks"
+           target="_blank" title="micalevisk.gist" rel="noopener">
+          what I'm learning
+        </a>
+        <br>
       </small>
       {{ content }}
     </p>
@@ -29,6 +34,7 @@ export default {
   data() {
     return {
       githubProfileLanguagesAPI: `https://ionicabizau.github.io/github-profile-languages/api.html?@${this.usernameGithub}`,
+      gistWithTasks: `https://gist.github.com/micalevisk/c07638d8ed2099a6bd351405915efae8`,
     }
   }
 }
