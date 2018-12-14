@@ -1,21 +1,16 @@
 <template>
   <header>
     <p>
-      <small v-once>
-        {{ title }}
+      <small v-once>{{ title }}
         <a :href="authorProfileHref" v-text="authorName"
            target="_blank" title="GitHub Profile" rel="noopener">
         </a>
         <br>
-        &raquo;<a :href="githubProfileLanguagesAPI"
-           target="_blank" title="pie chart with profile languages" rel="noopener">
-          acessar gráfico de uso das linguagens
-        </a>
+        &raquo;<a :href="githubProfileLanguagesAPI" target="_blank" title="pie chart with profile languages"
+                rel="noopener">acessar gráfico de uso das linguagens</a>
         <br>
-        &raquo;<a :href="gistWithTasks"
-           target="_blank" title="micalevisk.gist" rel="noopener">
-          what I'm learning
-        </a>
+        &raquo;<a :href="gistWithTasks" target="_blank" title="micalevisk.gist"
+                rel="noopener">what I'm learning</a>
         <br>
       </small>
       {{ content }}
