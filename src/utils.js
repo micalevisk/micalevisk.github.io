@@ -78,13 +78,13 @@ export const localStorageWithExpiration = {
       timestamp: Date.now() + expirationMS
     };
 
-    localStorage.setItem(key, JSON.stringify(record));
+    sessionStorage.setItem(key, JSON.stringify(record));
     return jsonData;
   },
 
   load(key) {
     if (typeof Storage === 'undefined') return false;
-    const record = JSON.parse( localStorage.getItem(key) );
+    const record = JSON.parse( sessionStorage.getItem(key) );
     if (!record) return false;
 
     return (Date.now() < record.timestamp) && JSON.parse(record.value);
