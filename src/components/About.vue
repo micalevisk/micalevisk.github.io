@@ -7,10 +7,10 @@
         </a>
         <br>
         &raquo;<a :href="githubProfileLanguagesAPI" target="_blank" title="pie chart with profile languages"
-                rel="noopener">acessar gráfico de uso das linguagens</a>
+                rel="noopener">Programming languages I have used so far</a>
         <br>
         &raquo;<a :href="gistWithTasks" target="_blank" title="micalevisk.gist"
-                rel="noopener">what I'm learning</a>
+                rel="noopener">What I'm learning?</a>
         <br>
       </small>
       {{ content }}
